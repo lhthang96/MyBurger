@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-export default () => {
-  return (
-    <div>
-      Hello world
-    </div>
-  );
+import Layout from './components/Layout/Layout';
+import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
+
+export default class extends Component {
+  render() {
+    return (
+      <div>
+        <Layout>
+          <BurgerBuilder />
+        </Layout>
+      </div>
+    );
+  }
 }
