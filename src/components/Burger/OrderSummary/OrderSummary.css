@@ -1,0 +1,9 @@
+.CheckoutSection {
+  display: flex;
+  align-items: center;
+}
+
+.BtnBox {
+  position: absolute;
+  right: 0;
+}

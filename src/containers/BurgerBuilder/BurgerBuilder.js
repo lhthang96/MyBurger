@@ -53,6 +53,10 @@ export default class extends Component {
     this.setState({readyToPurchase: false});
   }
 
+  continuePurchase = () => {
+    alert('Definitely you continued...');
+  }
+
   addIngredientHandler = (type) => {
     const oldCount = this.state.ingredients[type];
     const updatedCount = oldCount + 1;
@@ -94,7 +98,13 @@ export default class extends Component {
 
     return (
       <Auxiliary>
-        <Modal isShow={this.state.readyToPurchase} closeModal={this.cancelReadyToPurchase}><OrderSummary ingredients = {this.state.ingredients} /></Modal>
+        <Modal isShow={this.state.readyToPurchase} closeModal={this.cancelReadyToPurchase}>
+          <OrderSummary
+            ingredients = {this.state.ingredients}
+            totalPrice={this.state.totalPrice.toFixed(2)}
+            closeModal={this.cancelReadyToPurchase}
+            continuePurchase={this.continuePurchase} />
+        </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls 
           ingredientAdded={this.addIngredientHandler}

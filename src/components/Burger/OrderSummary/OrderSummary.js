@@ -2,20 +2,28 @@ import React from 'react';
 import classes from './OrderSummary.css';
 
 import Auxiliary from '../../../hoc/Auxiliary';
+import Button from '../../UI/Button/Button';
 
 const orderSummary = (props) => {
   const orderedIngredientsList = Object.keys(props.ingredients)
     .map(igKey => {
-      return <li key={igKey}><span>{igKey}: </span>{props.ingredients[igKey]}</li>
+      return <li key={igKey}><span style={{textTransform: 'capitalize'}}>{igKey}: </span>{props.ingredients[igKey]}</li>
     })
   return (
     <Auxiliary>
       <h3>Your order</h3>
-      <p>A delicious Burger with these following ingredients</p>
+      <p>A delicious Burger with these following ingredients:</p>
       <ul>
         {orderedIngredientsList}
       </ul>
-      <p>Countinue to checkout </p>
+      <p>Total Price: <strong>{props.totalPrice} $</strong></p>
+      <div className={classes.CheckoutSection}>
+        <p>Continue to checkout ?</p>
+        <div className={classes.BtnBox}>
+          <Button clicked={props.closeModal} btnType="Danger">Cancel</Button>
+          <Button clicked={props.continuePurchase} btnType="Success">Continue</Button>
+        </div>
+      </div>
     </Auxiliary>
   )
 }
