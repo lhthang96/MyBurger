@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import Auxiliary from '../../hoc/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -27,7 +29,28 @@ export default class extends Component {
       cheese: 0,
       meat: 0
     },
-    totalPrice: 4
+    totalPrice: 4,
+    readyToOrder: false,
+    readyToPurchase: false
+  }
+
+  checkReadyToOrder (ingredients) {
+    const sum = Object.keys(ingredients)
+      .map(igKey => {
+        return ingredients[igKey];
+      })
+      .reduce((sum, el) => {
+        return sum + el;
+      }, 0);
+      this.setState({readyToOrder: sum > 0});
+  }
+
+  setReadyToPurchase = () => {
+    this.setState({readyToPurchase: true});
+  }
+
+  cancelReadyToPurchase = () => {
+    this.setState({readyToPurchase: false});
   }
 
   addIngredientHandler = (type) => {
@@ -41,6 +64,7 @@ export default class extends Component {
     const oldPrice = this.state.totalPrice;
     const newPrice = oldPrice + priceChanged;
     this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
+    this.checkReadyToOrder(updatedIngredients);
   }
 
   removeIngredientHandler = (type) => {
@@ -58,6 +82,7 @@ export default class extends Component {
     const oldPrice = this.state.totalPrice;
     const newPrice = oldPrice - priceChanged;
     this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
+    this.checkReadyToOrder(updatedIngredients);
   }
 
   render() {
@@ -69,12 +94,15 @@ export default class extends Component {
 
     return (
       <Auxiliary>
+        <Modal isShow={this.state.readyToPurchase} closeModal={this.cancelReadyToPurchase}><OrderSummary ingredients = {this.state.ingredients} /></Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls 
-          ingredientAdded={this.addIngredientHandler.bind(this)}
-          ingredientRemoved = {this.removeIngredientHandler.bind(this)}
+          ingredientAdded={this.addIngredientHandler}
+          ingredientRemoved = {this.removeIngredientHandler}
           disabledRemoved = {disabledRemoved}
-          totalPrice={this.state.totalPrice} />
+          totalPrice={this.state.totalPrice}
+          readyToOrder={this.state.readyToOrder}
+          readyToPurchase={this.setReadyToPurchase} />
       </Auxiliary>
     );
   }
