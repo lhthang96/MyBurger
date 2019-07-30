@@ -11,7 +11,7 @@ const toolbar = (props) => {
       <div className={[classes.MenuIcon, classes.MobileOnly].join(' ')}><i className="fa fa-bars fa-2x"></i></div>
       <Logo brandColor='white' />
       <nav className={classes.DesktopOnly}>
-        <NavigationItems />
+        <NavigationItems version='desktop' />
       </nav>
     </header>
   )

@@ -6,6 +6,7 @@
 
 .LogoBox {
   height: 56px;
+  margin: 16px 0 32px;
 }
 
 @media (max-width: 767px) {

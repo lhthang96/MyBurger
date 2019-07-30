@@ -23,3 +23,23 @@
   background: #8F5C2C;
   border-bottom: 4px solid lightblue;
 }
+
+.NavigationItemMobile {
+  box-sizing: border-box;
+}
+
+.NavigationItemMobile a {
+  display: block;
+  height: 100%;
+  color: white;
+  text-decoration: none;
+  padding: 16px 10px;
+  box-sizing: border-box;
+}
+
+.NavigationItemMobile a:hover,
+.NavigationItemMobile a:active,
+.NavigationItemMobile a.active {
+  text-decoration: none;
+  background: #8F5C2C;
+}

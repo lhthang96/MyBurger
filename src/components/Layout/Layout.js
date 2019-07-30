@@ -5,7 +5,7 @@ import Auxiliary from '../../hoc/Auxiliary';
 
 import SideDrawer from '../UI/SideDrawer/SideDrawer';
 import Logo from '../Logo/Logo';
-import NavigationItem from '../Navigation/NavigationItems/NavigationItem/NavigationItem';
+import NavigationItems from '../Navigation/NavigationItems/NavigationItems';
 
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 
@@ -16,12 +16,9 @@ export default class extends Component {
         <SideDrawer>
           <div className={classes.SideMenuBox}>
             <div className={classes.LogoBox}>
-              <Logo brandColor='#703B09' />
+              <Logo brandColor='white' />
             </div>
-            <NavigationItem
-              link='/'
-              active
-            >Burger builder</NavigationItem>
+            <NavigationItems version='mobile' />
           </div>
         </SideDrawer>
         <Toolbar />
