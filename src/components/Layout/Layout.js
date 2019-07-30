@@ -5,7 +5,7 @@ import Auxiliary from '../../hoc/Auxiliary';
 
 import SideDrawer from '../UI/SideDrawer/SideDrawer';
 import Logo from '../Logo/Logo';
-import NavigationItems from '../Navigation/NavigationItems/NavigationItems';
+import SideNav from '../Navigation/NavigationItems/SideNav/SideNav';
 
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 
@@ -35,7 +35,7 @@ export default class extends Component {
             <div className={classes.LogoBox}>
               <Logo brandColor='white' />
             </div>
-            <NavigationItems version='mobile' />
+            <SideNav />
           </div>
         </SideDrawer>
         <Toolbar openSideMenuHandler={this.openSideMenuHandler} />

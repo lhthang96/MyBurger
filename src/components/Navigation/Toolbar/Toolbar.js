@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Toolbar.css';
 
-import NavigationItems from '../NavigationItems/NavigationItems';
+import TopNav from '../NavigationItems/TopNav/TopNav';
 
 import Logo from '../../Logo/Logo';
 
@@ -11,7 +11,7 @@ const toolbar = (props) => {
       <div className={[classes.MenuIcon, classes.MobileOnly].join(' ')} onClick={props.openSideMenuHandler}><i className="fas fa-bars fa-2x"></i></div>
       <Logo brandColor='white' />
       <nav className={classes.DesktopOnly}>
-        <NavigationItems version='desktop' />
+        <TopNav />
       </nav>
     </header>
   )
