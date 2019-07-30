@@ -17,6 +17,14 @@ const navigationItems = (props) => {
           link='/'
           version='desktop'
         >Checkout</NavigationItem>
+        <NavigationItem 
+          link='/'
+          version='desktop'
+        >Feedback</NavigationItem>
+        <NavigationItem 
+          link='/'
+          version='desktop'
+        >Contact</NavigationItem>
       </ul>
     );
   }
@@ -31,6 +39,14 @@ const navigationItems = (props) => {
         link='/'
         version='mobile'
       >Checkout</NavigationItem>
+      <NavigationItem 
+        link='/'
+        version='mobile'
+      >Feedback</NavigationItem>
+      <NavigationItem 
+        link='/'
+        version='mobile'
+      >Contact</NavigationItem>
     </ul>
   )
 }
