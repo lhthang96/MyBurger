@@ -35,7 +35,7 @@ export default class extends Component {
             <div className={classes.LogoBox}>
               <Logo brandColor='white' />
             </div>
-            <SideNav />
+            <SideNav closeSideMenuHandler={this.closeSideMenuHandler}/>
           </div>
         </SideDrawer>
         <Toolbar openSideMenuHandler={this.openSideMenuHandler} />

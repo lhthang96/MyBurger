@@ -5,3 +5,17 @@
   margin: 0;
   padding: 0;
 }
+
+.CloseSideNav {
+  height: 54px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 16px;
+  color: white;
+  cursor: pointer;
+}
+
+.CloseSideNav span {
+  margin-left: 8px;
+}
