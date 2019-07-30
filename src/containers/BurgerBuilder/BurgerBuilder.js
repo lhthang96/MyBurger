@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import axios from '../../axios';
 
 import Auxiliary from '../../hoc/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
@@ -31,7 +33,8 @@ export default class extends Component {
     },
     totalPrice: 4,
     readyToOrder: false,
-    readyToPurchase: false
+    readyToPurchase: false,
+    loading: false
   }
 
   checkReadyToOrder (ingredients) {
@@ -54,7 +57,25 @@ export default class extends Component {
   }
 
   continuePurchase = () => {
-    alert('Definitely you continued...');
+    this.setState({loading: true});
+    const order = {
+      ingredients: this.state.ingredients,
+      totalPrice: this.state.totalPrice,
+      customer: {
+        name: 'Customer 1',
+        address: 'Test Street 1',
+        phone: '0359532535'
+      },
+      delivery: 'fastest'
+    }
+    axios.post('/orders.json', order)
+      .then(response => {
+        this.setState({loading: false, readyToPurchase: false});
+        this.resetIngredient();
+      })
+      .catch(error => {
+        this.setState({loading: false});
+      })
   }
 
   addIngredientHandler = (type) => {
@@ -89,6 +110,20 @@ export default class extends Component {
     this.checkReadyToOrder(updatedIngredients);
   }
 
+  resetIngredient = () => {
+    const updatedState = {
+      ...this.state.ingredients
+    }
+    for (let key in updatedState) {
+      updatedState[key] = 0;
+    };
+    this.setState({
+      ingredients: updatedState,
+      totalPrice: 4,
+      readyToOrder: false
+    });
+  }
+
   render() {
     const disabledRemoved = {...this.state.ingredients};
 
@@ -99,6 +134,7 @@ export default class extends Component {
     return (
       <Auxiliary>
         <Modal isShow={this.state.readyToPurchase} closeModal={this.cancelReadyToPurchase}>
+          <Spinner isShow={this.state.loading} />
           <OrderSummary
             ingredients = {this.state.ingredients}
             totalPrice={this.state.totalPrice.toFixed(2)}
