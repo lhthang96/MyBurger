@@ -1,0 +1,19 @@
+.SideNavItem {
+  box-sizing: border-box;
+}
+
+.SideNavItem a {
+  display: block;
+  height: 100%;
+  color: white;
+  text-decoration: none;
+  padding: 16px 10px;
+  box-sizing: border-box;
+}
+
+.SideNavItem a:hover,
+.SideNavItem a:active,
+.SideNavItem a.active {
+  text-decoration: none;
+  background: #8F5C2C;
+}

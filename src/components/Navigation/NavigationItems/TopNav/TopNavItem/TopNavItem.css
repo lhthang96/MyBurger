@@ -1,0 +1,25 @@
+.TopNavItem {
+  margin: 0 8px;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.TopNavItem a {
+  display: block;
+  height: 100%;
+  color: white;
+  text-decoration: none;
+  padding: 16px 10px;
+  border-bottom: 4px solid transparent;
+  box-sizing: border-box;
+}
+
+.TopNavItem a:hover,
+.TopNavItem a:active,
+.TopNavItem a.active {
+  text-decoration: none;
+  background: #8F5C2C;
+  border-bottom: 4px solid lightblue;
+}
