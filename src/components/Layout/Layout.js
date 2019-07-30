@@ -29,7 +29,8 @@ export default class extends Component {
         <SideDrawer
           isShow={this.state.showSideMenu}
           openSideMenuHandler={this.openSideMenuHandler}
-          closeSideMenuHandler={this.closeSideMenuHandler} >
+          closeSideMenuHandler={this.closeSideMenuHandler}
+        >
           <div className={classes.SideMenuBox}>
             <div className={classes.LogoBox}>
               <Logo brandColor='white' />

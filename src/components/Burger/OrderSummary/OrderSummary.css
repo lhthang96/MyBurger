@@ -7,3 +7,13 @@
   position: absolute;
   right: 0;
 }
+
+@media (max-width: 499px) {
+  .CheckoutSection {
+    flex-direction: column;
+  }
+
+  .BtnBox {
+    position: relative;
+  }
+}
