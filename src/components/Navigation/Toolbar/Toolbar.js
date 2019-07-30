@@ -8,9 +8,9 @@ import Logo from '../../Logo/Logo';
 const toolbar = (props) => {
   return (
     <header className={classes.Toolbar}>
-      <div>Menu</div>
-      <Logo />
-      <nav>
+      <div className={[classes.MenuIcon, classes.MobileOnly].join(' ')}><i className="fa fa-bars fa-2x"></i></div>
+      <Logo brandColor='white' />
+      <nav className={classes.DesktopOnly}>
         <NavigationItems />
       </nav>
     </header>

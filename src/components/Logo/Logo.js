@@ -7,7 +7,7 @@ const logo = (props) => {
   return (
     <div className={classes.LogoBox}>
       <img src={BurgerLogo} alt="Burger logo" />
-      <span className={classes.BrandName}>MyBurger</span>
+      <span className={classes.BrandName} style={{color: props.brandColor}}>MyBurger</span>
     </div>
   );
 }

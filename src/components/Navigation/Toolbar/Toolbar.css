@@ -14,3 +14,20 @@
 .Toolbar nav {
   height: 100%;
 }
+
+.MenuIcon {
+  color: white;
+  margin-left: 16px;
+}
+
+@media (max-width: 767px) {
+  .DesktopOnly {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .MobileOnly {
+    display: none;
+  }
+}
