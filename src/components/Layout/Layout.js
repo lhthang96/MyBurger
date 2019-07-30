@@ -10,10 +10,26 @@ import NavigationItems from '../Navigation/NavigationItems/NavigationItems';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 
 export default class extends Component {
+
+  state = {
+    showSideMenu: false
+  }
+
+  openSideMenuHandler = () => {
+    this.setState({showSideMenu: true});
+  }
+
+  closeSideMenuHandler = () => {
+    this.setState({showSideMenu: false});
+  }
+
   render() {
     return (
       <Auxiliary>
-        <SideDrawer>
+        <SideDrawer
+          isShow={this.state.showSideMenu}
+          openSideMenuHandler={this.openSideMenuHandler}
+          closeSideMenuHandler={this.closeSideMenuHandler} >
           <div className={classes.SideMenuBox}>
             <div className={classes.LogoBox}>
               <Logo brandColor='white' />
@@ -21,7 +37,7 @@ export default class extends Component {
             <NavigationItems version='mobile' />
           </div>
         </SideDrawer>
-        <Toolbar />
+        <Toolbar openSideMenuHandler={this.openSideMenuHandler} />
         <main className={classes.Content}>
           {this.props.children}
         </main>

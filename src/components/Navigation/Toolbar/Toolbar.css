@@ -18,6 +18,7 @@
 .MenuIcon {
   color: white;
   margin-left: 16px;
+  cursor: pointer;
 }
 
 @media (max-width: 767px) {
