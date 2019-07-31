@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import axios from '../../axios';
 
-import Auxiliary from '../../hoc/Auxiliary';
+import withNotifHandler from '../../hoc/WithNotifHandler/WithNotifHandler';
+import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
@@ -15,7 +16,7 @@ const INGREDIENT_PRICES = {
   bacon: 0.7
 };
 
-export default class extends Component {
+class BurgerBuilder extends Component {
   // constructor(props) {
   //   super(props);
 
@@ -153,3 +154,5 @@ export default class extends Component {
     );
   }
 }
+
+export default withNotifHandler(BurgerBuilder, axios);

@@ -1,0 +1,61 @@
+.NotifBox {
+  width: 250px;
+  z-index: 800;
+  position: fixed;
+  top: 10%;
+  right: 1%;
+  padding: 10px;
+  box-sizing: border-box;
+  /* border: 1px solid red; */
+  box-shadow: 0 2px 2px rgba(0,0,0,0.7);
+  /* background: #fab1a0; */
+  /* border-left: 10px solid red; */
+  transition: 0.3s ease-out;
+}
+
+.CloseButton {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: #636e72;
+  cursor: pointer;
+}
+
+.NotifContent {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.NotifContent h3 {
+  margin: 0;
+  margin-bottom: 10px
+}
+
+.NotifContent p {
+  margin: 0;
+  padding: 0;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.ErrorBox {
+  background: #fab1a0;
+  color: #ff3838;
+  border: 1px solid #ff3838;
+  border-left: 10px solid #ff3838;
+}
+
+.SuccessBox {
+  background: #b8e994;
+  color: #009432;
+  border: 1px solid #009432;
+  border-left: 10px solid #009432;
+}
+
+.Show {
+  transform: translateX(0);
+}
+
+.Close {
+  transform: translateX(105%);
+}

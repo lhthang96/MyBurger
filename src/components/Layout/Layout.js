@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import classes from './Layout.css';
 
-import Auxiliary from '../../hoc/Auxiliary';
+import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 
 import SideDrawer from '../UI/SideDrawer/SideDrawer';
 import Logo from '../Logo/Logo';
