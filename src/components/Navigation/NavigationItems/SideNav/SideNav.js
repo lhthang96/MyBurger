@@ -8,16 +8,19 @@ const sideNav = (props) => (
   <ul className={classes.SideNav}>
     <SideNavItem 
       link='/'
-      active
+      clicked={props.closeSideMenuHandler}
     >Burger Builder</SideNavItem>
     <SideNavItem 
-      link='/'
+      link='/checkout'
+      clicked={props.closeSideMenuHandler}
     >Checkout</SideNavItem>
     <SideNavItem 
-      link='/'
+      link='/feedback'
+      clicked={props.closeSideMenuHandler}
     >Feedback</SideNavItem>
     <SideNavItem 
-      link='/'
+      link='/contact'
+      clicked={props.closeSideMenuHandler}
     >Contact</SideNavItem>
     <div className={classes.CloseSideNav} onClick={props.closeSideMenuHandler}>
       <i className="fas fa-reply"></i>

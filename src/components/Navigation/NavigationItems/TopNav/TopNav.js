@@ -9,18 +9,17 @@ const topNav = (props) => (
     <TopNavItem 
       link='/'
       version='desktop'
-      active
     >Burger Builder</TopNavItem>
     <TopNavItem 
-      link='/'
+      link='/checkout'
       version='desktop'
     >Checkout</TopNavItem>
     <TopNavItem 
-      link='/'
+      link='/feedback'
       version='desktop'
     >Feedback</TopNavItem>
     <TopNavItem 
-      link='/'
+      link='/contact'
       version='desktop'
     >Contact</TopNavItem>
   </ul>

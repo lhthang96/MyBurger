@@ -1,12 +1,15 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 import classes from './SideNavItem.css';
 
 const sideNavItem = (props) => (
-  <li className={classes.SideNavItem}><a
-    href={props.link}
-    className={props.active ? classes.active : null}
-  >{props.children}</a></li>
+  <li className={classes.SideNavItem}><NavLink
+    to={props.link}
+    exact
+    activeClassName={classes.active}
+    onClick={props.clicked}
+  >{props.children}</NavLink></li>
 )
 
 export default sideNavItem;

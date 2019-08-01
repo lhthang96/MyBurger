@@ -1,12 +1,12 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 import classes from './TopNavItem.css';
 
 const topNavItem = (props) => (
-  <li className={classes.TopNavItem}><a
-    href={props.link}
-    className={props.active ? classes.active : null}
-  >{props.children}</a></li>
+  <li className={classes.TopNavItem}><NavLink
+    to={props.link} activeClassName={classes.active} exact
+  >{props.children}</NavLink></li>
 )
 
 export default topNavItem;

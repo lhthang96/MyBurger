@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 import classes from './Logo.css';
 
 import BurgerLogo from '../../assets/images/burger-logo.png';
@@ -12,4 +13,4 @@ const logo = (props) => {
   );
 }
 
-export default logo;
+export default withRouter(logo);
