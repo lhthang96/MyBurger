@@ -1,0 +1,10 @@
+.CheckoutBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.OrderFormBox {
+  width: 60%
+}

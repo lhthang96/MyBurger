@@ -11,9 +11,9 @@ const sideNav = (props) => (
       clicked={props.closeSideMenuHandler}
     >Burger Builder</SideNavItem>
     <SideNavItem 
-      link='/checkout'
+      link='/orders'
       clicked={props.closeSideMenuHandler}
-    >Checkout</SideNavItem>
+    >Orders</SideNavItem>
     <SideNavItem 
       link='/feedback'
       clicked={props.closeSideMenuHandler}

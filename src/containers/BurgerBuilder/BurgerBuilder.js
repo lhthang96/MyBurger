@@ -5,9 +5,9 @@ import withNotifHandler from '../../hoc/WithNotifHandler/WithNotifHandler';
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
-import Modal from '../../components/UI/Modal/Modal';
-import Spinner from '../../components/UI/Spinner/Spinner';
-import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+// import Modal from '../../components/UI/Modal/Modal';
+// import Spinner from '../../components/UI/Spinner/Spinner';
+// import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -49,15 +49,15 @@ class BurgerBuilder extends Component {
       this.setState({readyToOrder: sum > 0});
   }
 
-  setReadyToPurchase = () => {
-    this.setState({readyToPurchase: true});
-  }
+  // setReadyToPurchase = () => {
+  //   this.setState({readyToPurchase: true});
+  // }
 
-  cancelReadyToPurchase = () => {
-    this.setState({readyToPurchase: false});
-  }
+  // cancelReadyToPurchase = () => {
+  //   this.setState({readyToPurchase: false});
+  // }
 
-  continuePurchase = () => {
+  goCheckout = () => {
     // this.setState({loading: true});
     // const order = {
     //   ingredients: this.state.ingredients,
@@ -145,14 +145,14 @@ class BurgerBuilder extends Component {
 
     return (
       <Auxiliary>
-        <Modal isShow={this.state.readyToPurchase} closeModal={this.cancelReadyToPurchase}>
+        {/* <Modal isShow={this.state.readyToPurchase} closeModal={this.cancelReadyToPurchase}>
           <Spinner isShow={this.state.loading} />
           <OrderSummary
             ingredients = {this.state.ingredients}
             totalPrice={this.state.totalPrice.toFixed(2)}
             closeModal={this.cancelReadyToPurchase}
             continuePurchase={this.continuePurchase} />
-        </Modal>
+        </Modal> */}
         <Burger ingredients={this.state.ingredients} />
         <BuildControls 
           ingredientAdded={this.addIngredientHandler}
@@ -160,7 +160,7 @@ class BurgerBuilder extends Component {
           disabledRemoved = {disabledRemoved}
           totalPrice={this.state.totalPrice}
           readyToOrder={this.state.readyToOrder}
-          readyToPurchase={this.setReadyToPurchase} />
+          goCheckout={this.goCheckout} />
       </Auxiliary>
     );
   }

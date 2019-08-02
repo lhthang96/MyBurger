@@ -1,0 +1,37 @@
+.OrderFormBox {
+  width: 60%;
+}
+
+.OrderFormBox h2 {
+  text-align: center;
+}
+
+.OrderFormBox form {
+  width: 100%
+}
+
+.OrderFormItem {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.OrderFormItem label {
+  width: 20%;
+}
+
+.OrderFormItem input {
+  width: 60%;
+  padding: 4px 8px;
+  line-height: 1.5;
+}
+
+.BtnBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

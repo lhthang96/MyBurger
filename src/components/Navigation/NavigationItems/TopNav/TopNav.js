@@ -8,19 +8,15 @@ const topNav = (props) => (
   <ul className={classes.TopNav}>
     <TopNavItem 
       link='/'
-      version='desktop'
     >Burger Builder</TopNavItem>
     <TopNavItem 
-      link='/checkout'
-      version='desktop'
-    >Checkout</TopNavItem>
+      link='/orders'
+    >Orders</TopNavItem>
     <TopNavItem 
       link='/feedback'
-      version='desktop'
     >Feedback</TopNavItem>
     <TopNavItem 
       link='/contact'
-      version='desktop'
     >Contact</TopNavItem>
   </ul>
 )

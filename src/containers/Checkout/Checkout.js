@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import classes from './Checkout.css';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
+import OrderForm from '../OrderForm/OrderForm';
 
 export default class extends Component {
   state = {
@@ -37,7 +38,9 @@ export default class extends Component {
     return(
       <div className={classes.CheckoutBox}>
         <CheckoutSummary
-          ingredients={this.state.ingredients}
+          ingredients={this.state.ingredients} />
+          
+        <OrderForm
           sendOrderHandler={this.sendOrderHandler}
           cancelOrderHandler={this.cancelOrderHandler} />
       </div>
