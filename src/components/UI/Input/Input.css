@@ -1,0 +1,30 @@
+.InputItem {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.InputItem .Label {
+  width: 20%;
+  text-align: left;
+}
+
+.InputItem .inputElement,
+.InputItem .selectElement {
+  width: 70%;
+  box-sizing: border-box;
+  padding: 4px 8px 8px;
+  line-height: 1.5;
+  outline: none;
+  border: 1px solid #703B09;
+  background: white;
+}
+
+.InputItem .inputElement:focus {
+  background: #ccc;
+  outline: none;
+}

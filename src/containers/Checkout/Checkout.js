@@ -37,12 +37,7 @@ class Checkout extends Component {
     const order = {
       ingredients: this.state.ingredients,
       totalPrice: 7.80,
-      customer: {
-        name: 'Customer 1',
-        address: 'Test Street 1',
-        phone: '0359532535'
-      },
-      delivery: 'fastest'
+      customer: this.state.contactData
     }
     axios.post('/orders.json', order)
       .then(response => {
@@ -71,7 +66,8 @@ class Checkout extends Component {
           
         <OrderForm
           sendOrderHandler={this.sendOrderHandler}
-          cancelOrderHandler={this.cancelOrderHandler} />
+          cancelOrderHandler={this.cancelOrderHandler}
+          ingredients={this.state.ingredients} />
       </div>
     )
   }
