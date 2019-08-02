@@ -90,9 +90,11 @@ export default class extends Component {
       }) 
     };
     
-    const ingredientsList = ingredients.map(item => (
-      <span key={item.name}>{item.name} ({item.amount})</span>
-    ))
+    const ingredientsList = ingredients.map(item => {
+      if (item.amount > 0) {
+        return <span key={item.name}>{item.name} ({item.amount})</span>
+      } else return null;
+    });
     return(ingredientsList);
   }
 
