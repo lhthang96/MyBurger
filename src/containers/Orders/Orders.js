@@ -3,6 +3,8 @@ import axios from '../../axios';
 
 import classes from './Orders.css';
 
+import Spinner from '../../components/UI/Spinner/Spinner';
+
 export default class extends Component {
 
   state = {
@@ -113,6 +115,9 @@ export default class extends Component {
     return (
       <div className={classes.OrdersBox}>
         <h3>Your orders:</h3>
+        <div className={classes.SpinnerBox}>
+          <Spinner isShow={this.state.loading} />
+        </div>
         {this.showOrdersList()}
         {this.showDemoOrders()}
       </div>

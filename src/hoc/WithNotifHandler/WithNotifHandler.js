@@ -31,11 +31,9 @@ const withNotifHandler = (WrappedComponent, axios) => {
     };
 
     componentWillUnmount() {
-      console.log('Will unmount ', this.reqInterceptor, this.resInterceptor);
       axios.interceptors.request.eject(this.reqInterceptor);
       axios.interceptors.response.eject(this.resInterceptor);
       if (this.autoHideNotif) {
-        console.log(this.autoHideNotif);
         clearTimeout(this.autoHideNotif);
         this.autoHideNotif = 0;
       }

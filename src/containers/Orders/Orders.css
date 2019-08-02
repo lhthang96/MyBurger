@@ -7,6 +7,12 @@
   margin-left: 12px;
 }
 
+.SpinnerBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .OrderItem {
   width: 100%;
   padding: 12px 24px;
