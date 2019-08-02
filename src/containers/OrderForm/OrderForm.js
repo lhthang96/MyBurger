@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
+import axios from '../../axios';
 
 import classes from './OrderForm.css';
+
+import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
+import withNotifHandler from '../../hoc/WithNotifHandler/WithNotifHandler';
 
 
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
+import Backdrop from '../../components/UI/Backdrop/Backdrop';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
-export default class extends Component {
+class OrderForm extends Component {
   state = {
     orderForm: {
       name: {
@@ -48,7 +54,8 @@ export default class extends Component {
         value: 'standard',
         label: 'Delivery method'
       },
-    }
+    },
+    loading: false
   }
 
   
@@ -100,35 +107,45 @@ export default class extends Component {
       });
     }
 
-    return(
-      <div className={classes.OrderFormBox}>
-        <h2>Contact Info</h2>
-        <form>
-          {formItems.map(item => (
-            <div className={classes.OrderFormItem} key={item.id}>
-              <Input
-                elementType={item.config.elementType}
-                elementConfig={item.config.elementConfig}
-                label={item.config.label}
-                value={item.config.value}
-                changed={(event) => this.inputChangedHandler(event, item.id)} />
-            </div>
-          ))}
-        </form>
+    const spinnerDisplayClass = this.state.loading ? classes.Show : classes.Hide;
 
-        <div className={classes.BtnBox}>
-           <Button
-              btnType='Danger'
-              clicked={this.cancelOrderHandler}
-           >Cancel
-           </Button>
-           <Button
-              btnType='Success'
-              clicked={this.sendOrderHandler}
-            >Order
-           </Button>
-         </div>
-      </div>
+    return(
+      <Auxiliary>
+        <Backdrop show={this.state.loading} />
+        <div className={[classes.SpinnerBox, spinnerDisplayClass].join(' ')}>
+          <Spinner isShow={this.state.loading} />
+        </div>
+        <div className={classes.OrderFormBox}>
+          <h2>Contact Info</h2>
+          <form>
+            {formItems.map(item => (
+              <div className={classes.OrderFormItem} key={item.id}>
+                <Input
+                  elementType={item.config.elementType}
+                  elementConfig={item.config.elementConfig}
+                  label={item.config.label}
+                  value={item.config.value}
+                  changed={(event) => this.inputChangedHandler(event, item.id)} />
+              </div>
+            ))}
+          </form>
+
+          <div className={classes.BtnBox}>
+            <Button
+                btnType='Danger'
+                clicked={this.cancelOrderHandler}
+            >Cancel
+            </Button>
+            <Button
+                btnType='Success'
+                clicked={this.sendOrderHandler}
+              >Order
+            </Button>
+          </div>
+        </div>
+      </Auxiliary>
     )
   }
 }
+
+export default withNotifHandler(OrderForm, axios);
