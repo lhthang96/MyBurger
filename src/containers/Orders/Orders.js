@@ -42,15 +42,20 @@ export default class extends Component {
       }
     ],
     orders: [],
-    loading: false
+    loading: true
   }
 
-  // componentWillMount() {
-  //   this.setState({loading: true});
-  // }
-
-  // componentDidMount() {
-  // }
+  componentDidMount() {
+    axios.get('/orders.json')
+      .then(res => {
+        console.log(res.data);
+        this.setState({loading:false})
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({loading: false});
+      })
+  }
 
   ingredientsList = (list) => {
     let ingredients = [];

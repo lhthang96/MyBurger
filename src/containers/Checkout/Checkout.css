@@ -8,3 +8,25 @@
 .OrderFormBox {
   width: 60%
 }
+
+.SpinnerBox {
+  width: 6em;
+  height: 6em;
+  position: fixed;
+  top: 40%;
+  left: 40%;
+  background: white;
+  z-index: 900;
+  border: 1px solid rgba(0,0,0,0.7);
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.Show {
+  display: flex;
+}
+
+.Hide {
+  display: none;
+}

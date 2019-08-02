@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
+import axios from '../../axios';
 
 import classes from './Checkout.css';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import OrderForm from '../OrderForm/OrderForm';
+import withNotifHandler from '../../hoc/WithNotifHandler/WithNotifHandler';
+import Backdrop from '../../components/UI/Backdrop/Backdrop';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
-export default class extends Component {
+class Checkout extends Component {
   state = {
     ingredients: {
       salad: 0,
@@ -14,7 +18,8 @@ export default class extends Component {
       cheese: 0
     },
     isSend: false,
-    isCancel: false
+    isCancel: false,
+    loading: false
   }
 
   componentDidMount() {
@@ -27,7 +32,26 @@ export default class extends Component {
   }
 
   sendOrderHandler = () => {
-    this.props.history.replace('/checkout/contact-data')
+    // this.props.history.replace('/checkout/contact-data')
+    this.setState({loading: true});
+    const order = {
+      ingredients: this.state.ingredients,
+      totalPrice: 7.80,
+      customer: {
+        name: 'Customer 1',
+        address: 'Test Street 1',
+        phone: '0359532535'
+      },
+      delivery: 'fastest'
+    }
+    axios.post('/orders.json', order)
+      .then(response => {
+        this.setState({loading: false});
+      })
+      .catch(error => {
+        this.setState({loading: false});
+        console.log(error);
+      })
   }
 
   cancelOrderHandler = () => {
@@ -35,8 +59,13 @@ export default class extends Component {
   }
 
   render() {
+    const spinnerDisplayClass = this.state.loading ? classes.Show : classes.Hide;
     return(
       <div className={classes.CheckoutBox}>
+        <Backdrop show={this.state.loading} />
+        <div className={[classes.SpinnerBox, spinnerDisplayClass].join(' ')}>
+          <Spinner isShow={this.state.loading} />
+        </div>
         <CheckoutSummary
           ingredients={this.state.ingredients} />
           
@@ -47,3 +76,5 @@ export default class extends Component {
     )
   }
 }
+
+export default withNotifHandler(Checkout, axios);
