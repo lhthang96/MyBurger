@@ -1,0 +1,25 @@
+.OrdersBox {
+  display: block;
+  width: 100%;
+}
+
+.OrderItem {
+  width: 100%;
+  padding: 12px 24px;
+  box-sizing: border-box;
+}
+
+.OrderItemContent {
+  padding: 12px;
+  border: 1px solid #703B09;
+  padding-left: 20px;
+  border-left: 8px solid #703B09;
+  box-shadow: 2px 0 1px #703B09;
+}
+
+.OrderItemContent span {
+  padding: 4px 8px;
+  margin: 0 4px;
+  background: #eee;
+  border: 1px solid #ccc;
+}
