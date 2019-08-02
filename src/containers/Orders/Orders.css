@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+.OrdersBox h3 {
+  margin-left: 12px;
+}
+
 .OrderItem {
   width: 100%;
   padding: 12px 24px;

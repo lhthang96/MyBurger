@@ -48,13 +48,35 @@ export default class extends Component {
   componentDidMount() {
     axios.get('/orders.json')
       .then(res => {
-        console.log(res.data);
-        this.setState({loading:false})
+        const fetchedData = [];
+        for (let key in res.data) {
+          fetchedData.push({
+            ...res.data[key],
+            status: 'Order received',
+            id: key
+          })
+        }
+        this.setState({loading:false, orders: fetchedData});
       })
       .catch(error => {
         console.log(error);
         this.setState({loading: false});
       })
+  }
+
+  showOrdersList = () => {
+    const list = this.state.orders.map(item => {
+      return (
+        <div className={classes.OrderItem} key={item.id}>
+          <div className={classes.OrderItemContent}>
+            <p><strong>Ingredients: </strong>{this.ingredientsList(item.ingredients)}</p>
+            <p><strong>Total Price: </strong>{item.totalPrice.toFixed(2)} $</p>
+            <p><strong>Status: </strong>{item.status}</p>
+          </div>
+        </div>
+      )
+    });
+    return list;
   }
 
   ingredientsList = (list) => {
@@ -91,6 +113,7 @@ export default class extends Component {
     return (
       <div className={classes.OrdersBox}>
         <h3>Your orders:</h3>
+        {this.showOrdersList()}
         {this.showDemoOrders()}
       </div>
     )

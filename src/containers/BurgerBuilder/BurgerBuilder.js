@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import axios from '../../axios';
+// import axios from '../../axios';
 
-import withNotifHandler from '../../hoc/WithNotifHandler/WithNotifHandler';
+// import withNotifHandler from '../../hoc/WithNotifHandler/WithNotifHandler';
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -166,4 +166,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default withNotifHandler(BurgerBuilder, axios);
+export default BurgerBuilder;

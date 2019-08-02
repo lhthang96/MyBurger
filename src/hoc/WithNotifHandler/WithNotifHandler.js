@@ -10,26 +10,35 @@ const withNotifHandler = (WrappedComponent, axios) => {
       showNotif: false
     }
 
-    componentDidMount() {
-      axios.interceptors.request.use(req => {
+    componentWillMount() {
+      this.reqInterceptor = axios.interceptors.request.use(req => {
         this.setState({error: null});
         return req;
       });
 
-      axios.interceptors.response.use(res => {
+      this.resInterceptor = axios.interceptors.response.use(res => {
         this.setState({showNotif: true});
-        this.autoHideNotif();
+        this.autoHideNotif = setTimeout(() => {
+          this.setState({showNotif: false})
+        }, 5000);
         return res;
       }, error => {
         this.setState({error: error, showNotif: true});
-        this.autoHideNotif();
+        this.autoHideNotif = setTimeout(() => {
+          this.setState({showNotif: false})
+        }, 5000);
       });
     };
 
-    autoHideNotif = () => {
-      setTimeout(() => {
-        this.setState({showNotif: false})
-      }, 5000);
+    componentWillUnmount() {
+      console.log('Will unmount ', this.reqInterceptor, this.resInterceptor);
+      axios.interceptors.request.eject(this.reqInterceptor);
+      axios.interceptors.response.eject(this.resInterceptor);
+      if (this.autoHideNotif) {
+        console.log(this.autoHideNotif);
+        clearTimeout(this.autoHideNotif);
+        this.autoHideNotif = 0;
+      }
     }
 
     closeNotifHandler = () => {
