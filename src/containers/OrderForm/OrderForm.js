@@ -22,8 +22,16 @@ class OrderForm extends Component {
           placeholder: 'Your name',
           type: 'text'
         },
+        label: 'Name',
         value: '',
-        label: 'Name'
+        isTouched: false,
+        shouldValidate: true,
+        isValid: false,
+        errorMessage: [],
+        rules: {
+          required: true,
+          minLength: 4
+        }
       },
       address: {
         elementType: 'input',
@@ -32,7 +40,15 @@ class OrderForm extends Component {
           type: 'text'
         },
         value: '',
-        label: 'Address'
+        label: 'Address',
+        isTouched: false,
+        shouldValidate: true,
+        isValid: false,
+        errorMessage: [],
+        rules: {
+          required: true,
+          minLength: 4
+        }
       },
       phone: {
         elementType: 'input',
@@ -41,7 +57,15 @@ class OrderForm extends Component {
           type: 'text'
         },
         value: '',
-        label: 'Phone'
+        label: 'Phone',
+        isTouched: false,
+        shouldValidate: false,
+        isValid: false,
+        errorMessage: [],
+        rules: {
+          required: true,
+          minLength: 4
+        }
       },
       deliMethod: {
         elementType: 'select',
@@ -53,14 +77,51 @@ class OrderForm extends Component {
           ]
         },
         value: 'standard',
-        label: 'Delivery method'
+        label: 'Delivery method',
+        isTouched: false,
+        shouldValidate: false,
+        isValid: false,
+        errorMessage: [],
+        rules: {
+          required: false
+        }
       },
     },
+    isFormValid: false,
     isCancel: false,
     loading: false
   }
 
-  
+  formValidation = (input, rules) => {
+    let isValid = true;
+    let errorMessage = [];
+
+    if (rules.required) {
+      if (input.trim() === '') {
+        isValid = false;
+        errorMessage.push('This field is required.');
+      }
+    };
+
+    if (rules.minLength) {
+      if (input.length < rules.minLength) {
+        isValid = false;
+        errorMessage.push('Min length is ' + rules.minLength + ' letters');
+      }
+    };
+
+    if (rules.maxLength) {
+      if (input.length > rules.maxLength) {
+        isValid = false;
+        errorMessage.push('Max length is ' + rules.maxLength + ' letters');
+      }
+    };
+
+    return ({
+      isValid: isValid,
+      errorMessage: errorMessage
+    });
+  }
 
   inputChangedHandler = (event, inputIdentify) => {
     const updatedOrderForm = {
@@ -70,6 +131,20 @@ class OrderForm extends Component {
       ...updatedOrderForm[inputIdentify]
     }
     updatedFormElement.value = event.target.value;
+
+    // Form validation
+    let checkedValue = {
+      isValid: true,
+      errorMessage: []
+    };
+    if (updatedFormElement.shouldValidate) {
+      checkedValue = this.formValidation(updatedFormElement.value, updatedFormElement.rules);
+    }
+
+    updatedFormElement.isTouched = true;
+    updatedFormElement.isValid = checkedValue.isValid;
+    updatedFormElement.errorMessage = checkedValue.errorMessage;
+
     updatedOrderForm[inputIdentify] = updatedFormElement;
     this.setState({orderForm: updatedOrderForm});
   }
@@ -129,7 +204,11 @@ class OrderForm extends Component {
                   elementConfig={item.config.elementConfig}
                   label={item.config.label}
                   value={item.config.value}
-                  changed={(event) => this.inputChangedHandler(event, item.id)} />
+                  changed={(event) => this.inputChangedHandler(event, item.id)}
+                  isTouched={item.config.isTouched}
+                  isValid={item.config.isValid}
+                  errorMessage={item.config.errorMessage}
+                  rules={item.config.rules} />
               </div>
             ))}
           </form>
