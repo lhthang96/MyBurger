@@ -26,11 +26,10 @@ class OrderForm extends Component {
         value: '',
         isTouched: false,
         shouldValidate: true,
-        isValid: false,
+        isValid: true,
         errorMessage: [],
         rules: {
-          required: true,
-          minLength: 4
+          required: true
         }
       },
       address: {
@@ -43,11 +42,10 @@ class OrderForm extends Component {
         label: 'Address',
         isTouched: false,
         shouldValidate: true,
-        isValid: false,
+        isValid: true,
         errorMessage: [],
         rules: {
-          required: true,
-          minLength: 4
+          required: true
         }
       },
       phone: {
@@ -59,12 +57,12 @@ class OrderForm extends Component {
         value: '',
         label: 'Phone',
         isTouched: false,
-        shouldValidate: false,
-        isValid: false,
+        shouldValidate: true,
+        isValid: true,
         errorMessage: [],
         rules: {
           required: true,
-          minLength: 4
+          isPhone: true
         }
       },
       deliMethod: {
@@ -106,14 +104,21 @@ class OrderForm extends Component {
     if (rules.minLength) {
       if (input.length < rules.minLength) {
         isValid = false;
-        errorMessage.push('Min length is ' + rules.minLength + ' letters');
+        errorMessage.push('Min length is ' + rules.minLength + ' letters.');
       }
     };
 
     if (rules.maxLength) {
       if (input.length > rules.maxLength) {
         isValid = false;
-        errorMessage.push('Max length is ' + rules.maxLength + ' letters');
+        errorMessage.push('Max length is ' + rules.maxLength + ' letters.');
+      }
+    };
+
+    if (rules.isPhone) {
+      if (input.length > 11 || input.length < 10) {
+        isValid = false;
+        errorMessage.push('Invalid phone number.');
       }
     };
 

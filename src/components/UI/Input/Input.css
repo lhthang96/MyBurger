@@ -20,11 +20,36 @@
   padding: 4px 8px 8px;
   line-height: 1.3;
   outline: none;
-  border: 1px solid #703B09;
-  background: white;
 }
 
 .InputItem .inputElement:focus {
   background: #ccc;
   outline: none;
+}
+
+.Invalid {
+  background: rgb(226, 152, 144);
+  border: 1px solid red;
+}
+
+.Valid {
+  border: 1px solid #703B09;
+  background: white;
+}
+
+.ErrorBox {
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 28%;
+}
+
+.ErrorBox p {
+  margin: 0;
+  font-size: 12px;
+  color: red;
+}
+
+.requiredSymbol {
+  color: red;
+  font-size: 12px;
 }

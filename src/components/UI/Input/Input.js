@@ -7,7 +7,9 @@ export default (props) => {
   let inputElementClass = [classes.inputElement];
 
   if (!props.isValid) {
-    inputElementClass.push('Invalid');
+    inputElementClass.push(classes.Invalid);
+  } else {
+    inputElementClass.push(classes.Valid)
   }
 
   const errorBox = () => {
@@ -42,9 +44,9 @@ export default (props) => {
 
   return (
     <div className={classes.InputItem}>
-      <label>{props.label} {props.rules.required ? '*' : null}</label>
+      <label>{props.label} <span className={classes.requiredSymbol}>{props.rules.required ? '*' : null}</span></label>
       {inputElement}
-      <div className={[classes.ErrorBox, props.isValid ? classes.NotShow : classes.Show].join(' ')}>
+      <div className={classes.ErrorBox}>
         {errorBox()}
       </div>
     </div>
