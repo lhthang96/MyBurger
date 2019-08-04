@@ -26,7 +26,7 @@ class OrderForm extends Component {
         value: '',
         isTouched: false,
         shouldValidate: true,
-        isValid: true,
+        isValid: false,
         errorMessage: [],
         rules: {
           required: true
@@ -42,7 +42,7 @@ class OrderForm extends Component {
         label: 'Address',
         isTouched: false,
         shouldValidate: true,
-        isValid: true,
+        isValid: false,
         errorMessage: [],
         rules: {
           required: true
@@ -58,7 +58,7 @@ class OrderForm extends Component {
         label: 'Phone',
         isTouched: false,
         shouldValidate: true,
-        isValid: true,
+        isValid: false,
         errorMessage: [],
         rules: {
           required: true,

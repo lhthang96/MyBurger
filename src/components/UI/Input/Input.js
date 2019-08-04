@@ -6,7 +6,7 @@ export default (props) => {
   let inputElement = null;
   let inputElementClass = [classes.inputElement];
 
-  if (!props.isValid) {
+  if (!props.isValid && props.isTouched) {
     inputElementClass.push(classes.Invalid);
   } else {
     inputElementClass.push(classes.Valid)
