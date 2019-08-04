@@ -78,7 +78,7 @@ class OrderForm extends Component {
         label: 'Delivery method',
         isTouched: false,
         shouldValidate: false,
-        isValid: false,
+        isValid: true,
         errorMessage: [],
         rules: {
           required: false
@@ -152,6 +152,15 @@ class OrderForm extends Component {
 
     updatedOrderForm[inputIdentify] = updatedFormElement;
     this.setState({orderForm: updatedOrderForm});
+
+    // Order disbled class
+    let readyToOrder = true;
+    for (let key in updatedOrderForm) {
+      if (!updatedOrderForm[key].isValid) {
+        readyToOrder = false;
+      }
+    }
+    this.setState({isFormValid: readyToOrder});
   }
 
   sendOrderHandler = () => {
@@ -227,6 +236,7 @@ class OrderForm extends Component {
             <Button
                 btnType='Success'
                 clicked={this.sendOrderHandler}
+                disabled={!this.state.isFormValid}
               >Order
             </Button>
           </div>
