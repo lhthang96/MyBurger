@@ -50,6 +50,7 @@ export default class extends Component {
   componentDidMount() {
     axios.get('/orders.json')
       .then(res => {
+        if (this.unmount) return;
         const fetchedData = [];
         for (let key in res.data) {
           fetchedData.push({
@@ -64,6 +65,10 @@ export default class extends Component {
         console.log(error);
         this.setState({loading: false});
       })
+  }
+
+  componentWillUnmount () {
+    this.unmount = true;
   }
 
   showOrdersList = () => {
