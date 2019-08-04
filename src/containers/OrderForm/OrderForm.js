@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from '../../axios';
 
 import classes from './OrderForm.css';
@@ -55,6 +56,7 @@ class OrderForm extends Component {
         label: 'Delivery method'
       },
     },
+    isCancel: false,
     loading: false
   }
 
@@ -95,7 +97,7 @@ class OrderForm extends Component {
   }
 
   cancelOrderHandler = () => {
-    this.props.history.goBack();
+    this.setState({isCancel: true});
   }
 
   render() {
@@ -108,9 +110,11 @@ class OrderForm extends Component {
     }
 
     const spinnerDisplayClass = this.state.loading ? classes.Show : classes.Hide;
+    const isRedirect = this.state.isCancel ? <Redirect to='/' /> : null;
 
     return(
       <Auxiliary>
+        {isRedirect}
         <Backdrop show={this.state.loading} />
         <div className={[classes.SpinnerBox, spinnerDisplayClass].join(' ')}>
           <Spinner isShow={this.state.loading} />
