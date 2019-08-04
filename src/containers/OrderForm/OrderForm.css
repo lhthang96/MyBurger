@@ -57,3 +57,18 @@
 .Hide {
   display: none;
 }
+
+.SigninText {
+  width: 100%;
+  text-align: center;
+}
+
+.SigninText p {
+  font-size: 14px;
+}
+
+.SigninText p span {
+  cursor: pointer;
+  color: #5C9210;
+  font-weight: 600;
+}

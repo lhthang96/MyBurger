@@ -227,6 +227,10 @@ class OrderForm extends Component {
             ))}
           </form>
 
+          <div className={classes.SigninText}>
+            <p>Please <span>Sign In</span> or fill out all your contact info to submit the order</p>
+          </div>
+
           <div className={classes.BtnBox}>
             <Button
                 btnType='Danger'
