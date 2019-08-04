@@ -7,7 +7,8 @@ import TopNavItem from './TopNavItem/TopNavItem';
 const topNav = (props) => (
   <ul className={classes.TopNav}>
     <TopNavItem 
-      link='/'
+      link='/burger-builder'
+      noExact
     >Burger Builder</TopNavItem>
     <TopNavItem 
       link='/orders'

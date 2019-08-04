@@ -7,8 +7,9 @@ import SideNavItem from './SideNavItem/SideNavItem';
 const sideNav = (props) => (
   <ul className={classes.SideNav}>
     <SideNavItem 
-      link='/'
+      link='/burger-builder'
       clicked={props.closeSideMenuHandler}
+      noExact
     >Burger Builder</SideNavItem>
     <SideNavItem 
       link='/orders'

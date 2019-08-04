@@ -6,7 +6,7 @@ import classes from './SideNavItem.css';
 const sideNavItem = (props) => (
   <li className={classes.SideNavItem}><NavLink
     to={props.link}
-    exact
+    exact={props.noExact ? false : true}
     activeClassName={classes.active}
     onClick={props.clicked}
   >{props.children}</NavLink></li>

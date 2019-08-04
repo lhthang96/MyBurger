@@ -14,13 +14,12 @@ export default class extends Component {
       <div>
         <BrowserRouter>
           <Layout>
-            <Route path='/' exact component={BurgerBuilder} />
-            <Route path='/checkout' component={Checkout} />
+            <Route path='/' exact render={() => (<p>Home page</p>)} />
+            <Route path='/burger-builder' exact component={BurgerBuilder} />
+            <Route path='/burger-builder/checkout' component={Checkout} />
             <Route path='/orders' component={Orders} />
             <Route path='/feedback' component={Feedback} />
             <Route path='/contact' component={Contact} />
-            {/* <BurgerBuilder />
-            <Checkout /> */}
           </Layout>
         </BrowserRouter>
       </div>
