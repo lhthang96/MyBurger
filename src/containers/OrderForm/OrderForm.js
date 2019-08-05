@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actionTypes from '../../store/actions';
 import axios from '../../axios';
 
 import classes from './OrderForm.css';
@@ -164,7 +166,6 @@ class OrderForm extends Component {
   }
 
   sendOrderHandler = () => {
-    // this.props.history.replace('/checkout/contact-data')
     const contactData = {};
     for (let key in this.state.orderForm) {
       contactData[key] = this.state.orderForm[key].value;
@@ -178,6 +179,7 @@ class OrderForm extends Component {
     axios.post('/orders.json', order)
       .then(response => {
         this.setState({loading: false});
+        this.props.resetIngredients();
       })
       .catch(error => {
         this.setState({loading: false});
@@ -250,4 +252,10 @@ class OrderForm extends Component {
   }
 }
 
-export default withNotifHandler(OrderForm, axios);
+const mapDispatchToProps = dispatch => {
+  return {
+    resetIngredients: () => dispatch({type: actionTypes.RESET_INGREDIENTS})
+  }
+}
+
+export default connect(null,mapDispatchToProps)(withNotifHandler(OrderForm, axios));
