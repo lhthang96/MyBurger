@@ -3,7 +3,6 @@ import React from 'react';
 import classes from './CheckoutSummary.css';
 
 import Burger from '../../Burger/Burger';
-// import Button from '../../UI/Button/Button';
 
 const checkoutSummary = (props) => {
   let ingredients = [];
@@ -30,40 +29,11 @@ const checkoutSummary = (props) => {
         <h4>Your ingredients:</h4>
         
         <div className={classes.IngredientInfoBox}>
-          {/* <span className={classes.BurgerInfoItem}>
-            Salad (2)
-          </span>
-
-          <span className={classes.BurgerInfoItem}>
-            Meat (2)
-          </span>
-
-          <span className={classes.BurgerInfoItem}>
-            Cheese (2)
-          </span>
-
-          <span className={classes.BurgerInfoItem}>
-            Bacon (2)
-          </span> */}
           {IngredientItems}
         </div>
 
-        <p>Total Price: <span>7.80 $</span></p>
+        <p>Total Price: <span>{props.totalPrice.toFixed(2)} $</span></p>
       </div>
-       {/* <div className={classes.OrderBox}>
-         <div className={classes.BtnBox}>
-           <Button
-              btnType='Danger'
-              clicked={props.cancelOrderHandler}
-           >Cancel
-           </Button>
-           <Button
-              btnType='Success'
-              clicked={props.sendOrderHandler}
-            >Send Order
-           </Button>
-         </div>
-       </div> */}
     </div>
   )
 }

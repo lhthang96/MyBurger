@@ -172,7 +172,7 @@ class OrderForm extends Component {
     this.setState({loading: true});
     const order = {
       ingredients: this.props.ingredients,
-      totalPrice: 7.80,
+      totalPrice: this.props.totalPrice,
       customer: contactData
     }
     axios.post('/orders.json', order)
@@ -199,7 +199,7 @@ class OrderForm extends Component {
     }
 
     const spinnerDisplayClass = this.state.loading ? classes.Show : classes.Hide;
-    const isRedirect = this.state.isCancel ? <Redirect to='/' /> : null;
+    const isRedirect = this.state.isCancel ? <Redirect to='/burger-builder' /> : null;
 
     return(
       <Auxiliary>

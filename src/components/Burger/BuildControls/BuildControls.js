@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as actionTypes from '../../../store/actions';
 
 import classes from './BuildControls.css';
 
@@ -18,8 +20,8 @@ const buildControls = (props) => (
       return <BuildControl
         key={item.label}
         label={item.label}
-        added={() => props.ingredientAdded(item.type)}
-        removed = {() => props.ingredientRemoved(item.type)}
+        added={() => props.addIngredient(item.type)}
+        removed = {() => props.removeIngredient(item.type)}
         isDisabled = {props.disabledRemoved[item.type]} />
     })}
     <button
@@ -30,4 +32,11 @@ const buildControls = (props) => (
   </div>
 );
 
-export default buildControls;
+const mapDispatchToProps = dispatch => {
+  return {
+    addIngredient: (ingredientType) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientType: ingredientType}),
+    removeIngredient: (ingredientType) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientType: ingredientType})
+  }
+}
+
+export default connect(null,mapDispatchToProps)(buildControls);

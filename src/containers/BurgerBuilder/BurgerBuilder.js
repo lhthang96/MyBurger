@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 // HOC
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
@@ -7,24 +8,9 @@ import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
-const INGREDIENT_PRICES = {
-  salad: 0.5,
-  cheese: 0.4,
-  meat: 1.3,
-  bacon: 0.7
-};
-
 class BurgerBuilder extends Component {
 
   state = {
-    ingredients: {
-      salad: 0,
-      bacon: 0,
-      cheese: 0,
-      meat: 0
-    },
-    totalPrice: 4,
-    readyToOrder: false,
     readyToPurchase: false,
     loading: false
   }
@@ -38,13 +24,13 @@ class BurgerBuilder extends Component {
         return sum + el;
       }, 0);
 
-    this.setState({readyToOrder: sum > 0});
+    return sum > 0;
   }
 
   goCheckout = () => {
     const queryParams = [];
-    for (let i in this.state.ingredients) {
-      queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+    for (let i in this.props.storeIngredients) {
+      queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.storeIngredients[i]));
     }
     const queryString = queryParams.join('&');
     this.props.history.push({
@@ -53,41 +39,41 @@ class BurgerBuilder extends Component {
     })
   }
 
-  addIngredientHandler = (type) => {
-    const oldCount = this.state.ingredients[type];
-    const updatedCount = oldCount + 1;
-    const updatedIngredients = {
-      ...this.state.ingredients
-    }
-    updatedIngredients[type] = updatedCount;
-    const priceChanged = INGREDIENT_PRICES[type];
-    const oldPrice = this.state.totalPrice;
-    const newPrice = oldPrice + priceChanged;
-    this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
-    this.checkReadyToOrder(updatedIngredients);
-  }
+  // addIngredientHandler = (type) => {
+  //   const oldCount = this.props.storeIngredients[type];
+  //   const updatedCount = oldCount + 1;
+  //   const updatedIngredients = {
+  //     ...this.props.storeIngredients
+  //   }
+  //   updatedIngredients[type] = updatedCount;
+  //   const priceChanged = INGREDIENT_PRICES[type];
+  //   const oldPrice = this.state.totalPrice;
+  //   const newPrice = oldPrice + priceChanged;
+  //   this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
+  //   this.checkReadyToOrder(updatedIngredients);
+  // }
 
-  removeIngredientHandler = (type) => {
-    const oldCount = this.state.ingredients[type];
+  // removeIngredientHandler = (type) => {
+  //   const oldCount = this.props.storeIngredients[type];
 
-    // Check whether ingredient have
-    if (oldCount <= 0) return;
+  //   // Check whether ingredient have
+  //   if (oldCount <= 0) return;
 
-    const updatedCount = oldCount - 1;
-    const updatedIngredients = {
-      ...this.state.ingredients
-    }
-    updatedIngredients[type] = updatedCount;
-    const priceChanged = INGREDIENT_PRICES[type];
-    const oldPrice = this.state.totalPrice;
-    const newPrice = oldPrice - priceChanged;
-    this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
-    this.checkReadyToOrder(updatedIngredients);
-  }
+  //   const updatedCount = oldCount - 1;
+  //   const updatedIngredients = {
+  //     ...this.props.storeIngredients
+  //   }
+  //   updatedIngredients[type] = updatedCount;
+  //   const priceChanged = INGREDIENT_PRICES[type];
+  //   const oldPrice = this.state.totalPrice;
+  //   const newPrice = oldPrice - priceChanged;
+  //   this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
+  //   this.checkReadyToOrder(updatedIngredients);
+  // }
 
   resetIngredient = () => {
     const updatedState = {
-      ...this.state.ingredients
+      ...this.props.storeIngredients
     }
     for (let key in updatedState) {
       updatedState[key] = 0;
@@ -100,7 +86,7 @@ class BurgerBuilder extends Component {
   }
 
   render() {
-    const disabledRemoved = {...this.state.ingredients};
+    const disabledRemoved = {...this.props.storeIngredients};
 
     for (let key in disabledRemoved) {
       disabledRemoved[key] = disabledRemoved[key] <= 0;
@@ -108,14 +94,14 @@ class BurgerBuilder extends Component {
 
     return (
       <Auxiliary>
-        <Burger ingredients={this.state.ingredients} />
+        <Burger ingredients={this.props.storeIngredients} />
 
         <BuildControls 
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved = {this.removeIngredientHandler}
           disabledRemoved = {disabledRemoved}
-          totalPrice={this.state.totalPrice}
-          readyToOrder={this.state.readyToOrder}
+          totalPrice={this.props.storeTotalPrice}
+          readyToOrder={this.checkReadyToOrder(this.props.storeIngredients)}
           goCheckout={this.goCheckout} />
 
       </Auxiliary>
@@ -123,4 +109,11 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder;
+const mapStateToProps = state => {
+  return {
+    storeIngredients: state.ingredients,
+    storeTotalPrice: state.totalPrice
+  }
+}
+
+export default connect(mapStateToProps,null)(BurgerBuilder);
