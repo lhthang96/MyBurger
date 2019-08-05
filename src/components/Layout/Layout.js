@@ -26,7 +26,6 @@ class Layout extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Auxiliary>
         <SideDrawer
@@ -36,7 +35,7 @@ class Layout extends Component {
         >
           <div className={classes.SideMenuBox}>
             <div className={classes.LogoBox}>
-              <Logo brandColor='white'/>
+              <Logo brandColor='white' closeSideMenuHandler={this.closeSideMenuHandler} />
             </div>
             <SideNav closeSideMenuHandler={this.closeSideMenuHandler}/>
           </div>
