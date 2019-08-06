@@ -77,7 +77,6 @@ class Orders extends Component {
 
   showOrdersList = () => {
     if (this.props.ordersList) {
-      console.log(this.props.ordersList);
       const list = this.props.ordersList.map(item => {
         return (
           <div className={classes.OrderItem} key={item.id}>
@@ -129,9 +128,9 @@ class Orders extends Component {
     return (
       <div className={classes.OrdersBox}>
         <h3>Your orders:</h3>
-        {/* <div className={classes.SpinnerBox}>
-          <Spinner isShow />
-        </div> */}
+        <div className={classes.SpinnerBox}>
+          <Spinner isShow={this.props.loading} />
+        </div>
         {this.showOrdersList()}
         {this.showDemoOrders()}
       </div>
@@ -141,7 +140,8 @@ class Orders extends Component {
 
 const mapStateToProps = state => {
   return {
-    ordersList: state.order.ordersList
+    ordersList: state.order.ordersList,
+    loading: state.order.loading
   }
 }
 

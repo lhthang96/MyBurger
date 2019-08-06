@@ -1,7 +1,8 @@
 import * as actionType from '../actions/actionTypes';
 
 const initState = {
-  ordersList: []
+  ordersList: [],
+  loading: true
 }
 
 export default (state = initState, action) => {
@@ -18,7 +19,8 @@ export default (state = initState, action) => {
     case actionType.INIT_ORDERS_LIST:
       return {
         ...state,
-        ordersList: action.ordersList
+        ordersList: action.ordersList,
+        loading: false
       }
 
     default: return state
