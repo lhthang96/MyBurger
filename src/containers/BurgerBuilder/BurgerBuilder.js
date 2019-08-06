@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 // HOC
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
@@ -7,12 +8,17 @@ import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 // Components
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class BurgerBuilder extends Component {
 
   state = {
     readyToPurchase: false,
     loading: false
+  }
+
+  componentDidMount() {
+    this.props.fetchIngredients();
   }
 
   checkReadyToOrder (ingredients) {
@@ -52,7 +58,7 @@ class BurgerBuilder extends Component {
       disabledRemoved[key] = disabledRemoved[key] <= 0;
     }
 
-    return (
+    return ( this.props.storeIngredients ?
       <Auxiliary>
         <Burger ingredients={this.props.storeIngredients} />
 
@@ -64,7 +70,8 @@ class BurgerBuilder extends Component {
           readyToOrder={this.checkReadyToOrder(this.props.storeIngredients)}
           goCheckout={this.goCheckout} />
 
-      </Auxiliary>
+      </Auxiliary> :
+      <Spinner isShow/>
     );
   }
 }
@@ -76,4 +83,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps,null)(BurgerBuilder);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchIngredients: () => dispatch(actions.fetchIngredients())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(BurgerBuilder);

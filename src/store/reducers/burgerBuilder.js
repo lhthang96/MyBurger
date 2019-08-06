@@ -8,12 +8,7 @@ const INGREDIENT_PRICES = {
 };
 
 const initState = {
-  ingredients: {
-    salad: 0,
-    bacon: 0,
-    cheese: 0,
-    meat: 0
-  },
+  ingredients: null,
   totalPrice: 4
 }
 
@@ -40,8 +35,27 @@ const reducer = (state = initState, action) => {
         }
 
     case actionTypes.RESET_INGREDIENTS:
+      const resetIngredients = {
+        ...state.ingredients
+      };
+      for (let key in resetIngredients) {
+        resetIngredients[key] = 0
+      }
       return {
-        ...initState
+        ...state,
+        ingredients: resetIngredients,
+        totalPrice: 4
+      }
+
+    case actionTypes.INIT_INGREDIENTS:
+      if (state.ingredients === null){
+        return {
+          ...state,
+          ingredients: action.ingredients
+        }
+      };
+      return {
+        ...state
       }
 
     default: return state;
