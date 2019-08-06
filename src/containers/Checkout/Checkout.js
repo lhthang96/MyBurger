@@ -22,9 +22,9 @@ class Checkout extends Component {
       </div>
     ) :
     (
-      <div className={classes.CheckoutBox}>
-        <p>Your order was send to us...</p><br />
-        <p> Lets check the <span><Link to='/orders'>Orders list</Link></span> or <span><Link to='/burger-builder'>build</Link></span> another burger.</p>
+      <div className={classes.NotifBox}>
+        <p className={classes.deliText}>Your order was send to us. We will deliver to you as soon as possible.<span><i className="fas fa-shipping-fast fa-2x"></i></span></p>
+        <p> Lets check the <span><Link to='/orders' className={classes.successText}>Orders list</Link></span> or <span><Link to='/burger-builder' className={classes.successText}>build</Link></span> another burger.</p>
       </div>
     )
 
