@@ -217,8 +217,6 @@ class OrderForm extends Component {
     return(
       <Auxiliary>
         {isRedirect}
-        <Backdrop show={this.state.loading} />
-        
         <Modal isShow={this.state.isShowOrderSummary} closeModal={this.closeOrderSummary}>
           {modalContent}
         </Modal>

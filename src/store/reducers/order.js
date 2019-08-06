@@ -2,6 +2,8 @@ import * as actionType from '../actions/actionTypes';
 
 const initState = {
   ordersList: [],
+  error: false,
+  errorMessage: '',
   loading: true,
   sendLoading: false
 }
@@ -16,6 +18,14 @@ export default (state = initState, action) => {
           id: action.id,
           orderData: action.orderData
         })
+      }
+
+    case actionType.ORDER_FAIL:
+      return {
+        ...state,
+        sendLoading: false,
+        error: true,
+        errorMessage: action.error
       }
 
     case actionType.START_SEND_ORDER:
