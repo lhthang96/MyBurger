@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
-import * as actionTypes from '../../store/actions';
+import * as actionTypes from '../../store/actions/actionTypes';
 import axios from '../../axios';
 
 import classes from './OrderForm.css';
