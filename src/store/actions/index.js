@@ -5,4 +5,7 @@ export {
   fetchIngredients
 } from './burgerBuilder';
 
-export {} from './order'
+export {
+  sendOrder,
+  fetchOrdersList
+} from './order'

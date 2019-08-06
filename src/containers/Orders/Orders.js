@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import axios from '../../axios';
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
+// import axios from '../../axios';
 
 import classes from './Orders.css';
 
 import Spinner from '../../components/UI/Spinner/Spinner';
 
-export default class extends Component {
+class Orders extends Component {
 
   state = {
     demoOrders: [
@@ -48,23 +50,25 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    axios.get('/orders.json')
-      .then(res => {
-        if (this.unmount) return;
-        const fetchedData = [];
-        for (let key in res.data) {
-          fetchedData.push({
-            ...res.data[key],
-            status: 'Order received',
-            id: key
-          })
-        }
-        this.setState({loading:false, orders: fetchedData});
-      })
-      .catch(error => {
-        console.log(error);
-        this.setState({loading: false});
-      })
+    if (this.unmount) return;
+    this.props.initOrdersList();
+    // axios.get('/orders.json')
+    //   .then(res => {
+    //     if (this.unmount) return;
+    //     const fetchedData = [];
+    //     for (let key in res.data) {
+    //       fetchedData.push({
+    //         ...res.data[key],
+    //         status: 'Order received',
+    //         id: key
+    //       })
+    //     }
+    //     this.setState({loading:false, orders: fetchedData});
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //     this.setState({loading: false});
+    //   })
   }
 
   componentWillUnmount () {
@@ -72,18 +76,21 @@ export default class extends Component {
   }
 
   showOrdersList = () => {
-    const list = this.state.orders.map(item => {
-      return (
-        <div className={classes.OrderItem} key={item.id}>
-          <div className={classes.OrderItemContent}>
-            <p><strong>Ingredients: </strong>{this.ingredientsList(item.ingredients)}</p>
-            <p><strong>Total Price: </strong>{item.totalPrice.toFixed(2)} $</p>
-            <p><strong>Status: </strong>{item.status}</p>
+    if (this.props.ordersList) {
+      console.log(this.props.ordersList);
+      const list = this.props.ordersList.map(item => {
+        return (
+          <div className={classes.OrderItem} key={item.id}>
+            <div className={classes.OrderItemContent}>
+              <p><strong>Ingredients: </strong>{this.ingredientsList(item.orderData.ingredients)}</p>
+              <p><strong>Total Price: </strong>{item.orderData.totalPrice.toFixed(2)} $</p>
+              <p><strong>Status: </strong>{item.orderData.status}</p>
+            </div>
           </div>
-        </div>
-      )
-    });
-    return list;
+        )
+      });
+      return list;
+    } return <p>You don't have any orders. Lets get one...</p> ;
   }
 
   ingredientsList = (list) => {
@@ -122,12 +129,26 @@ export default class extends Component {
     return (
       <div className={classes.OrdersBox}>
         <h3>Your orders:</h3>
-        <div className={classes.SpinnerBox}>
-          <Spinner isShow={this.state.loading} />
-        </div>
+        {/* <div className={classes.SpinnerBox}>
+          <Spinner isShow />
+        </div> */}
         {this.showOrdersList()}
         {this.showDemoOrders()}
       </div>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    ordersList: state.order.ordersList
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    initOrdersList: () => dispatch(actions.fetchOrdersList())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);

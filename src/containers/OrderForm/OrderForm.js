@@ -174,17 +174,21 @@ class OrderForm extends Component {
     const order = {
       ingredients: this.props.ingredients,
       totalPrice: this.props.totalPrice,
-      customer: contactData
+      customer: contactData,
+      status: 'Order received'
     }
-    axios.post('/orders.json', order)
-      .then(response => {
-        this.setState({loading: false});
-        this.props.resetIngredients();
-      })
-      .catch(error => {
-        this.setState({loading: false});
-        console.log(error);
-      })
+
+    this.props.sendOrder(order);
+
+    // axios.post('/orders.json', order)
+    //   .then(response => {
+    //     this.setState({loading: false});
+    //     this.props.resetIngredients();
+    //   })
+    //   .catch(error => {
+    //     this.setState({loading: false});
+    //     console.log(error);
+    //   })
   }
 
   cancelOrderHandler = () => {
@@ -254,7 +258,8 @@ class OrderForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    resetIngredients: () => dispatch(actions.resetIngredient())
+    resetIngredients: () => dispatch(actions.resetIngredient()),
+    sendOrder: (orderData) => dispatch(actions.sendOrder(orderData))
   }
 }
 
