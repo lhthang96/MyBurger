@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
-import * as actionTypes from '../../store/actions/actionTypes';
+import * as actions from '../../store/actions/index';
 import axios from '../../axios';
 
 import classes from './OrderForm.css';
@@ -254,7 +254,7 @@ class OrderForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    resetIngredients: () => dispatch({type: actionTypes.RESET_INGREDIENTS})
+    resetIngredients: () => dispatch(actions.resetIngredient())
   }
 }
 

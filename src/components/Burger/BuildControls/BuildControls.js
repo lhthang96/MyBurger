@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actionTypes from '../../../store/actions/actionTypes';
+import * as actions from '../../../store/actions/index';
 
 import classes from './BuildControls.css';
 
@@ -34,8 +34,8 @@ const buildControls = (props) => (
 
 const mapDispatchToProps = dispatch => {
   return {
-    addIngredient: (ingredientType) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientType: ingredientType}),
-    removeIngredient: (ingredientType) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientType: ingredientType})
+    addIngredient: (ingredientType) => dispatch(actions.addIngredient(ingredientType)),
+    removeIngredient: (ingredientType) => dispatch(actions.removeIngredient(ingredientType))
   }
 }
 
