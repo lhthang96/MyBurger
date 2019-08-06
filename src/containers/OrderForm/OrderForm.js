@@ -9,10 +9,11 @@ import classes from './OrderForm.css';
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import withNotifHandler from '../../hoc/WithNotifHandler/WithNotifHandler';
 
-
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import Backdrop from '../../components/UI/Backdrop/Backdrop';
+import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 class OrderForm extends Component {
@@ -89,7 +90,7 @@ class OrderForm extends Component {
     },
     isFormValid: false,
     isCancel: false,
-    loading: false
+    isShowOrderSummary: false,
   }
 
   formValidation = (input, rules) => {
@@ -165,6 +166,14 @@ class OrderForm extends Component {
     this.setState({isFormValid: readyToOrder});
   }
 
+  openOrderSummary = () => {
+    this.setState({isShowOrderSummary: true});
+  }
+
+  closeOrderSummary = () => {
+    this.setState({isShowOrderSummary: false});
+  }
+
   sendOrderHandler = () => {
     const contactData = {};
     for (let key in this.state.orderForm) {
@@ -179,16 +188,6 @@ class OrderForm extends Component {
     }
 
     this.props.sendOrder(order);
-
-    // axios.post('/orders.json', order)
-    //   .then(response => {
-    //     this.setState({loading: false});
-    //     this.props.resetIngredients();
-    //   })
-    //   .catch(error => {
-    //     this.setState({loading: false});
-    //     console.log(error);
-    //   })
   }
 
   cancelOrderHandler = () => {
@@ -204,16 +203,25 @@ class OrderForm extends Component {
       });
     }
 
-    const spinnerDisplayClass = this.state.loading ? classes.Show : classes.Hide;
     const isRedirect = this.state.isCancel ? <Redirect to='/burger-builder' /> : null;
+    const modalContent = this.props.loading ? (
+        <Spinner isShow={this.props.loading} />
+    ) : (
+      <OrderSummary
+        ingredients={this.props.ingredients}
+        totalPrice={this.props.totalPrice}
+        closeModal={this.closeOrderSummary}
+        sendOrder={this.sendOrderHandler} />
+    )
 
     return(
       <Auxiliary>
         {isRedirect}
         <Backdrop show={this.state.loading} />
-        <div className={[classes.SpinnerBox, spinnerDisplayClass].join(' ')}>
-          <Spinner isShow={this.state.loading} />
-        </div>
+        
+        <Modal isShow={this.state.isShowOrderSummary} closeModal={this.closeOrderSummary}>
+          {modalContent}
+        </Modal>
         <div className={classes.OrderFormBox}>
           <h2>Contact Info</h2>
           <form>
@@ -245,7 +253,7 @@ class OrderForm extends Component {
             </Button>
             <Button
                 btnType='Success'
-                clicked={this.sendOrderHandler}
+                clicked={this.openOrderSummary}
                 disabled={!this.state.isFormValid}
               >Order
             </Button>
@@ -256,6 +264,14 @@ class OrderForm extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    ingredients: state.burgerBuilder.ingredients,
+    totalPrice: state.burgerBuilder.totalPrice,
+    loading: state.order.sendLoading
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     resetIngredients: () => dispatch(actions.resetIngredient()),
@@ -263,4 +279,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null,mapDispatchToProps)(withNotifHandler(OrderForm, axios));
+export default connect(mapStateToProps,mapDispatchToProps)(withNotifHandler(OrderForm, axios));

@@ -24,7 +24,7 @@ class Checkout extends Component {
     (
       <div className={classes.NotifBox}>
         <p className={classes.deliText}>Your order was send to us. We will deliver to you as soon as possible.<span><i className="fas fa-shipping-fast fa-2x"></i></span></p>
-        <p> Lets check the <span><Link to='/orders' className={classes.successText}>Orders list</Link></span> or <span><Link to='/burger-builder' className={classes.successText}>build</Link></span> another burger.</p>
+        <p> Lets check the <span><Link to='/orders' className={classes.successText}>Orders list</Link></span> or <span><Link to='/burger-builder' className={classes.successText}>Build</Link></span> another burger.</p>
       </div>
     )
 

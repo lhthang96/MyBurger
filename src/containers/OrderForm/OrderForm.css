@@ -39,9 +39,7 @@
 .SpinnerBox {
   width: 6em;
   height: 6em;
-  position: fixed;
-  top: 40%;
-  left: 50%;
+  display: block;
   background: white;
   z-index: 900;
   border: 1px solid rgba(0,0,0,0.7);

@@ -21,7 +21,7 @@ const orderSummary = (props) => {
         <p>Continue to checkout ?</p>
         <div className={classes.BtnBox}>
           <Button clicked={props.closeModal} btnType="Danger">Cancel</Button>
-          <Button clicked={props.continuePurchase} btnType="Success">Continue</Button>
+          <Button clicked={props.sendOrder} btnType="Success">Continue</Button>
         </div>
       </div>
     </Auxiliary>

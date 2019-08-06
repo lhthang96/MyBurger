@@ -10,9 +10,16 @@ export const orderSuccess = (orderId, orderData) => {
   }
 }
 
+export const startSendOrder = () => {
+  return {
+    type: actionTypes.START_SEND_ORDER
+  }
+}
+
 export const sendOrder = (orderData) => {
   return dispatch => {
-    axios.post('https://my-burger-9ae73.firebaseio.com/orders.json', orderData)
+    dispatch(startSendOrder());
+    axios.post('https://my-burger-9ae73.firebaseio.com/orders', orderData)
     .then(res => {
       dispatch(actions.resetIngredient());
       dispatch(orderSuccess(res.data.name, orderData));

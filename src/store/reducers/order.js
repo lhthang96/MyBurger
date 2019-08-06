@@ -2,7 +2,8 @@ import * as actionType from '../actions/actionTypes';
 
 const initState = {
   ordersList: [],
-  loading: true
+  loading: true,
+  sendLoading: false
 }
 
 export default (state = initState, action) => {
@@ -10,10 +11,17 @@ export default (state = initState, action) => {
     case actionType.ORDER_SUCCESS:
       return {
         ...state,
+        sendLoading: false,
         ordersList: state.ordersList.concat({
           id: action.id,
           orderData: action.orderData
         })
+      }
+
+    case actionType.START_SEND_ORDER:
+      return {
+        ...state,
+        sendLoading: true
       }
 
     case actionType.INIT_ORDERS_LIST:
