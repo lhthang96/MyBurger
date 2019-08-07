@@ -31,9 +31,17 @@ const startSendOrder = (state, action) => {
   return updatedObject(state, {sendLoading: true});
 }
 
-const initOrdersList = (state, action) => {
+const fetchOrdersListSuccess = (state, action) => {
   return updatedObject(state, {
     ordersList: action.ordersList,
+    loading: false
+  })
+}
+
+const fetchOrdersListFail = (state, action) => {
+  return updatedObject(state, {
+    error: true,
+    errorMessage: action.error,
     loading: false
   })
 }
@@ -49,8 +57,11 @@ export default (state = initState, action) => {
     case actionType.START_SEND_ORDER:
       return startSendOrder(state, action);
 
-    case actionType.INIT_ORDERS_LIST:
-      return initOrdersList(state, action);
+    case actionType.FETCH_ORDERS_LIST_SUCCESS:
+      return fetchOrdersListSuccess(state, action);
+    
+    case actionType.FETCH_ORDERS_LIST_FAIL:
+      return fetchOrdersListFail(state, action);
 
     default: return state
   }

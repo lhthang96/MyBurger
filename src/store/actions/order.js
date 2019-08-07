@@ -37,16 +37,23 @@ export const sendOrder = (orderData) => {
   }
 }
 
-export const initOrdersList = (list) => {
+export const fetchOrdersListSuccess = (list) => {
   return {
-    type: actionTypes.INIT_ORDERS_LIST,
+    type: actionTypes.FETCH_ORDERS_LIST_SUCCESS,
     ordersList: list
+  }
+}
+
+export const fetchOrdersListFail = (error) => {
+  return {
+    type: actionTypes.FETCH_ORDERS_LIST_FAIL,
+    error: error
   }
 }
 
 export const fetchOrdersList = () => {
   return dispatch => {
-    axios.get('/orders.json')
+    axios.get('/orders')
       .then(res => {
         const ordersList = [];
         for (let key in res.data) {
@@ -55,10 +62,10 @@ export const fetchOrdersList = () => {
             orderData: res.data[key]
           });
         };
-        dispatch(initOrdersList(ordersList))
+        dispatch(fetchOrdersListSuccess(ordersList))
       })
     .catch(err => {
-      console.log(err);
+      dispatch(fetchOrdersListFail(err));
     })
   }
 }

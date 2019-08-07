@@ -19,6 +19,14 @@ class Orders extends Component {
   }
 
   showOrdersList = () => {
+    if (this.props.error) {
+      return (
+        <div className={classes.ErrorBox}>
+          Something went wrong...!!!
+        </div>
+      )
+    }
+
     if (this.props.ordersList.length > 0) {
       const list = this.props.ordersList.map(item => {
         return (
@@ -73,7 +81,8 @@ class Orders extends Component {
 const mapStateToProps = state => {
   return {
     ordersList: state.order.ordersList,
-    loading: state.order.loading
+    loading: state.order.loading,
+    error: state.order.error
   }
 }
 

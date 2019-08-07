@@ -56,3 +56,7 @@
 .displayNone {
   display: none;
 }
+
+.ErrorBox {
+  text-align: center;
+}
