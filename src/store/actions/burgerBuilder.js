@@ -30,7 +30,7 @@ export const initIngredients = (ingredients) => {
 
 export const fetchIngredients = () => {
   return dispatch => {
-    axios.get('https://my-burger-9ae73.firebaseio.com/ingredients.json')
+    axios.get('/ingredients.json')
       .then(res => {
         dispatch(initIngredients(res.data[Object.keys(res.data)[0]].ingredients)); // Get first props in the res.data object
       })

@@ -26,7 +26,7 @@ export const startSendOrder = () => {
 export const sendOrder = (orderData) => {
   return dispatch => {
     dispatch(startSendOrder());
-    axios.post('https://my-burger-9ae73.firebaseio.com/orders.json', orderData)
+    axios.post('/orders.json', orderData)
     .then(res => {
       dispatch(orderSuccess(res.data.name, orderData));
       dispatch(actions.resetIngredient());
@@ -46,7 +46,7 @@ export const initOrdersList = (list) => {
 
 export const fetchOrdersList = () => {
   return dispatch => {
-    axios.get('https://my-burger-9ae73.firebaseio.com/orders.json')
+    axios.get('/orders.json')
       .then(res => {
         const ordersList = [];
         for (let key in res.data) {

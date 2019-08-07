@@ -12,7 +12,7 @@ const initState = {
   totalPrice: 4
 }
 
-const reducer = (state = initState, action) => {
+export default (state = initState, action) => {
   switch (action.type) {
     case actionTypes.ADD_INGREDIENT:
       return {
@@ -61,5 +61,3 @@ const reducer = (state = initState, action) => {
     default: return state;
   }
 }
-
-export default reducer;
