@@ -7,6 +7,7 @@ import Checkout from './containers/Checkout/Checkout';
 import Orders from './containers/Orders/Orders';
 import Feedback from './containers/Feedback/Feedback';
 import Contact from './components/Contact/Contact';
+import HomePage from './components/Pages/HomePage/HomePage';
 
 export default class extends Component {
   render() {
@@ -14,7 +15,7 @@ export default class extends Component {
       <div>
         <BrowserRouter>
           <Layout>
-            <Route path='/' exact render={() => (<p>Home page</p>)} />
+            <Route path='/' exact component={HomePage} />
             <Route path='/burger-builder' exact component={BurgerBuilder} />
             <Route path='/burger-builder/checkout' component={Checkout} />
             <Route path='/orders' component={Orders} />

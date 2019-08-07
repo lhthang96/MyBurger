@@ -8,6 +8,10 @@
   text-decoration: none;
 }
 
+.LogoLink:hover {
+  text-decoration: none;
+}
+
 .LogoContent {
   height: 100%;
   display: flex;

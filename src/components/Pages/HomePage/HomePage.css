@@ -1,0 +1,19 @@
+.sectionTitle {
+  text-align: center;
+  margin: 16px 0 32px;
+  font-family: 'Gochi hand';
+  font-size: 4em;
+  color: #703B09;
+}
+
+.SectionContent {
+  padding: 0 20px;
+}
+
+.imageBox img {
+  border-radius: 10px;
+}
+
+.SectionText {
+  margin: 0;
+}
