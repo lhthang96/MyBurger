@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
-// import axios from '../../axios';
 
 import classes from './Orders.css';
 
@@ -9,66 +9,9 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Orders extends Component {
 
-  state = {
-    demoOrders: [
-      {
-        ingredients: {
-          salad: 1,
-          meat: 2,
-          cheese: 1,
-          bacon: 1
-        },
-        totalPrice: 7.80,
-        status: 'Order received',
-        id: '1'
-      },
-      {
-        ingredients: {
-          salad: 1,
-          meat: 2,
-          cheese: 1,
-          bacon: 1
-        },
-        totalPrice: 7.80,
-        status: 'Shipping',
-        id: '2'
-      },
-      {
-        ingredients: {
-          salad: 1,
-          meat: 2,
-          cheese: 1,
-          bacon: 1
-        },
-        totalPrice: 7.80,
-        status: 'Done',
-        id: '3'
-      }
-    ],
-    orders: [],
-    loading: true
-  }
-
   componentDidMount() {
     if (this.unmount) return;
     this.props.initOrdersList();
-    // axios.get('/orders.json')
-    //   .then(res => {
-    //     if (this.unmount) return;
-    //     const fetchedData = [];
-    //     for (let key in res.data) {
-    //       fetchedData.push({
-    //         ...res.data[key],
-    //         status: 'Order received',
-    //         id: key
-    //       })
-    //     }
-    //     this.setState({loading:false, orders: fetchedData});
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //     this.setState({loading: false});
-    //   })
   }
 
   componentWillUnmount () {
@@ -76,7 +19,7 @@ class Orders extends Component {
   }
 
   showOrdersList = () => {
-    if (this.props.ordersList) {
+    if (this.props.ordersList.length > 0) {
       const list = this.props.ordersList.map(item => {
         return (
           <div className={classes.OrderItem} key={item.id}>
@@ -89,7 +32,12 @@ class Orders extends Component {
         )
       });
       return list;
-    } return <p>You don't have any orders. Lets get one...</p> ;
+    } return (
+      <div className={classes.noOrderMessageBox}>
+        <p className={classes.noOrdersMessage}>You don't have any orders.</p>
+        <p><span><Link to='/burger-builder' className={classes.noOrderLink}>Build a burger</Link></span> to order now?</p>
+      </div>
+    ) ;
   }
 
   ingredientsList = (list) => {
@@ -109,30 +57,14 @@ class Orders extends Component {
     return(ingredientsList);
   }
 
-  showDemoOrders = () => {
-    const demoList = this.state.demoOrders.map(item => {
-      return (
-        <div className={classes.OrderItem} key={item.id}>
-          <div className={classes.OrderItemContent}>
-            <p><strong>Ingredients: </strong>{this.ingredientsList(item.ingredients)}</p>
-            <p><strong>Total Price: </strong>{item.totalPrice.toFixed(2)} $</p>
-            <p><strong>Status: </strong>{item.status}</p>
-          </div>
-        </div>
-      )
-    });
-    return (demoList);
-  }
-
   render() {
     return (
       <div className={classes.OrdersBox}>
-        <h3>Your orders:</h3>
+        <h3 className={this.props.ordersList.length > 0 ? null : classes.displayNone}>Your orders:</h3>
         <div className={classes.SpinnerBox}>
           <Spinner isShow={this.props.loading} />
         </div>
-        {this.showOrdersList()}
-        {this.showDemoOrders()}
+        {this.props.loading ? null : this.showOrdersList()}
       </div>
     )
   }
