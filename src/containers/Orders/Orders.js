@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
+// import axios from '../../axios';
 
 import classes from './Orders.css';
+
+// import withNotifHandler from '../../hoc/WithNotifHandler/WithNotifHandler';
 
 import Spinner from '../../components/UI/Spinner/Spinner';
 
@@ -22,7 +25,8 @@ class Orders extends Component {
     if (this.props.error) {
       return (
         <div className={classes.ErrorBox}>
-          Something went wrong...!!!
+          <i className="fas fa-exclamation-triangle fa-4x"></i>
+          <p>{this.props.errorMessage.message}</p>
         </div>
       )
     }
@@ -82,7 +86,8 @@ const mapStateToProps = state => {
   return {
     ordersList: state.order.ordersList,
     loading: state.order.loading,
-    error: state.order.error
+    error: state.order.error,
+    errorMessage: state.order.errorMessage
   }
 }
 

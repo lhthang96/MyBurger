@@ -4,7 +4,7 @@ import { updatedObject } from '../utility';
 const initState = {
   ordersList: [],
   error: false,
-  errorMessage: '',
+  errorMessage: null,
   loading: true,
   sendLoading: false
 }
