@@ -10,6 +10,7 @@ import Logo from '../Logo/Logo';
 import SideNav from '../Navigation/NavigationItems/SideNav/SideNav';
 
 import Toolbar from '../Navigation/Toolbar/Toolbar';
+import Footer from '../Pages/Footer/Footer';
 
 class Layout extends Component {
 
@@ -44,6 +45,8 @@ class Layout extends Component {
         <main className={classes.Content}>
           {this.props.children}
         </main>
+        
+        <Footer />
       </Auxiliary>
     );
   }

@@ -6,8 +6,8 @@ import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import Checkout from './containers/Checkout/Checkout';
 import Orders from './containers/Orders/Orders';
 import Feedback from './containers/Feedback/Feedback';
-import Contact from './components/Contact/Contact';
 import HomePage from './components/Pages/HomePage/HomePage';
+import ContactPage from './components/Pages/ContactPage/ContactPage';
 
 export default class extends Component {
   render() {
@@ -20,7 +20,7 @@ export default class extends Component {
             <Route path='/burger-builder/checkout' component={Checkout} />
             <Route path='/orders' component={Orders} />
             <Route path='/feedback' component={Feedback} />
-            <Route path='/contact' component={Contact} />
+            <Route path='/contact' component={ContactPage} />
           </Layout>
         </BrowserRouter>
       </div>

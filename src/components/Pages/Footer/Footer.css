@@ -1,0 +1,48 @@
+.Footer {
+  background: #703B09;
+  color: white;
+  padding: 16px 0;
+}
+
+.FooterContent {
+  padding: 10px 20px;
+}
+
+.FooterContent p {
+  text-align: center;
+  font-size: 12px;
+  margin: 0;
+}
+
+.FooterRow {
+  align-items: center;
+}
+
+.SocialBox {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.SocialBox a {
+  margin-right: 8px;
+}
+
+.MoreInfoBox {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+}
+
+.MoreInfoBox a {
+  margin-left: 12px;
+}
+
+.MoreInfoBox a:hover {
+  text-decoration: none;
+}
+
+.MoreInfoBox p {
+  color: white;
+  font-size: 14px;
+}

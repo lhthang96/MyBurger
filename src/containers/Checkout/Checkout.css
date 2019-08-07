@@ -32,6 +32,7 @@
 }
 
 .NotifBox {
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,7 +53,7 @@
   text-align: center;
 }
 
-.NotifBox .successText {
+.NotifBox .SuccessText {
   text-decoration: none;
   font-weight: 600;
   color: #5C9210;

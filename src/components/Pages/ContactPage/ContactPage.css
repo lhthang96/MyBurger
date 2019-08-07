@@ -1,0 +1,16 @@
+.ContactPage {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ContactContent {
+  height: 40vh;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  border: 1px solid rgba(0,0,0,.7);
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
