@@ -77,13 +77,22 @@ class Orders extends Component {
   }
 
   render() {
+    if (this.props.isAuthenticated) {
+      return (
+        <div className={classes.OrdersBox}>
+          <h3 className={this.props.ordersList.length > 0 ? null : classes.displayNone}>Your orders:</h3>
+          <div className={classes.SpinnerBox}>
+            <Spinner isShow={this.props.loading} />
+          </div>
+          {this.props.loading ? null : this.showOrdersList()}
+        </div>
+      )
+    }
     return (
       <div className={classes.OrdersBox}>
-        <h3 className={this.props.ordersList.length > 0 ? null : classes.displayNone}>Your orders:</h3>
-        <div className={classes.SpinnerBox}>
-          <Spinner isShow={this.props.loading} />
+        <div className={classes.NotAuthMessageBox}>
+          <p>You have to <span><Link to='/signin' className={classes.SuccessText}>Sign in</Link></span> to see your orders...</p>
         </div>
-        {this.props.loading ? null : this.showOrdersList()}
       </div>
     )
   }
@@ -94,7 +103,8 @@ const mapStateToProps = state => {
     ordersList: state.order.ordersList,
     loading: state.order.loading,
     error: state.order.error,
-    errorMessage: state.order.errorMessage
+    errorMessage: state.order.errorMessage,
+    isAuthenticated: state.auth.token !== null
   }
 }
 

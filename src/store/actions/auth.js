@@ -47,12 +47,13 @@ export const signinSend = (email, password) => {
           dispatch(signinSuccess(res.data.localId, res.data.idToken));
           dispatch(autoLogout(res.data.expiresIn));
         } else {
+          console.log(res);
           dispatch(signinFail(res.data.error));
         }
       })
       .catch(err => {
-        console.log(err);
-        dispatch(signinError(err));
+        console.log(err.response.data);
+        dispatch(signinError(err.response.data.error));
       })
   }
 }

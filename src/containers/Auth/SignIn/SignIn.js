@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
  
@@ -70,15 +70,19 @@ class SignIn extends Component {
       </div>
     ))
 
+    const errorMessage = this.props.error ? <p style={{color: 'red'}}>{this.props.error.message}</p> : null;
+
     let form = <Spinner isShow />;
 
     if (!this.props.loading) {
-      form = <form onSubmit={(event) => this.onSignInSendHandler(event, this.state.inputControls.email.value, this.state.inputControls.password.value)}>
-                {authForm}
-                <Button
-                  btnType='Success'
-                >Submit</Button>
-              </form>
+      form = (
+        <form onSubmit={(event) => this.onSignInSendHandler(event, this.state.inputControls.email.value, this.state.inputControls.password.value)}>
+          {errorMessage}
+          {authForm}
+          <p>Didn't have an account? <span><Link to='/signup' className={classes.PrimaryText}>Sign Up</Link></span> now.</p>
+          <Button btnType='Success'>Submit</Button>
+        </form>
+      )
     }
 
     return (
@@ -96,7 +100,8 @@ class SignIn extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
-    isAuthenticated: state.token !== null
+    isAuthenticated: state.auth.token !== null,
+    error: state.auth.error
   }
 }
 

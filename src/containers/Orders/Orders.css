@@ -85,3 +85,22 @@
   width: 100%;
   text-align: center;
 }
+
+.NotAuthMessageBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SuccessText {
+  text-decoration: none;
+  color: #5C9210;
+  font-weight: 600;
+}
+
+.SuccessText:hover {
+  text-decoration: none;
+  color: #5C9210;
+}

@@ -28,3 +28,13 @@
   width: 100%
 }
 
+.PrimaryText {
+  text-decoration: none;
+  color: #38ada9;
+  font-weight: 600;
+}
+
+.PrimaryText:hover {
+  text-decoration: none;
+  color: #38ada9;
+}
