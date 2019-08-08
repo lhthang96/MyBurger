@@ -10,6 +10,10 @@
   font-weight: bold;
 }
 
+.Button:focus {
+  outline: none;
+}
+
 .Button:disabled {
   color: #ccc;
   cursor: not-allowed;

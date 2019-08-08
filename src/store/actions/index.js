@@ -9,3 +9,7 @@ export {
   sendOrder,
   fetchOrdersList
 } from './order'
+
+export {
+  authSend
+} from './auth'

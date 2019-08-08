@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-
+import {connect} from 'react-redux';
+import * as actions from '../../../store/actions/index';
+ 
 import classes from './SignIn.css';
 
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 
-export default class extends Component {
+class SignIn extends Component {
   state = {
     inputControls: {
       email: {
@@ -96,6 +98,11 @@ export default class extends Component {
     this.setState({inputControls: updatedInputControls});
   }
 
+  onAuthSendHandler = (event, email, password) => {
+    event.preventDefault();
+    this.props.onAuthSend(email, password);
+  }
+
   render () {
     const authFormElementsArray = [];
     for (let key in this.state.inputControls) {
@@ -125,7 +132,7 @@ export default class extends Component {
     return (
       <div className={classes.AuthSection}>
         <div className={classes.AuthBox}>
-          <form>
+          <form onSubmit={(event) => this.onAuthSendHandler(event, this.state.inputControls.email.value, this.state.inputControls.password.value)}>
             {authForm}
             <Button
               btnType='Success'
@@ -136,3 +143,11 @@ export default class extends Component {
     )
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAuthSend: (email, password) => dispatch(actions.authSend(email, password))
+  }
+}
+
+export default connect(null,mapDispatchToProps)(SignIn);
