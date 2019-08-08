@@ -39,7 +39,6 @@ export const signinSend = (email, password) => {
     };
     axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBY3e98rH3pA4xYbAwYCPF3BQJsdoyn_GU', signinData)
       .then(res => {
-        console.log(res);
         if (res.status === 200 || res.status === 201) {
           localStorage.setItem('Token', res.data.idToken);
           localStorage.setItem('UserId', res.data.localId);
@@ -47,12 +46,10 @@ export const signinSend = (email, password) => {
           dispatch(signinSuccess(res.data.localId, res.data.idToken));
           dispatch(autoLogout(res.data.expiresIn));
         } else {
-          console.log(res);
           dispatch(signinFail(res.data.error));
         }
       })
       .catch(err => {
-        console.log(err.response.data);
         dispatch(signinError(err.response.data.error));
       })
   }
@@ -94,7 +91,6 @@ export const signupSend = (email, password) => {
     };
     axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBY3e98rH3pA4xYbAwYCPF3BQJsdoyn_GU', signupData)
       .then(res => {
-        console.log(res);
         if (res.status === 200 || res.status === 201) {
           dispatch(signupSuccess())
         } else {

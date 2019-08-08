@@ -6,24 +6,30 @@ const initState = {
   userId: null,
   token: null,
   error: null,
-  loading: false
+  loading: false,
+  signupSuccess: false
 }
 
 const signupStart = (state, action) => {
-  return updatedObject(state, {error: null, loading: true});
+  return updatedObject(state, {
+    error: null,
+    loading: true
+  });
 }
 
 const signupSuccess = (state, action) => {
   return updatedObject(state, {
     error: null,
-    loading: false
+    loading: false,
+    signupSuccess: true
   });
 }
 
 const signupFail = (state, action) => {
   return updatedObject(state, {
     error: action.error,
-    loading: false
+    loading: false,
+    signupSuccess: false
   })
 }
 

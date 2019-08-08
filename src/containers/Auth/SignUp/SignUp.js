@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
  
@@ -169,6 +169,14 @@ class SignUp extends Component {
       )
     }
 
+    if (this.props.signupSuccess) {
+      return (
+        <div className={classes.AuthSection}>
+          <p>You've sign up successfully. <span><Link to='/signin' className={classes.SuccessText}>Sign in</Link></span> now.</p>
+        </div>
+      )
+    }
+
     return (
       <div className={classes.AuthSection}>
         {this.props.isAuthenticated ? <Redirect to='/' /> : null }
@@ -185,7 +193,8 @@ const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
     error: state.auth.error,
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
+    signupSuccess: state.auth.signupSuccess
   }
 }
 
