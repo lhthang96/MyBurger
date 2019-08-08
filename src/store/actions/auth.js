@@ -123,3 +123,20 @@ export const autoLogout = (expiresTime) => {
     },expiresTime*1000)
   }
 }
+
+export const authCheckInit = () => {
+  return dispatch => {
+    const token = localStorage.getItem('Token');
+    if (!token) {
+      dispatch(logout());
+    } else {
+      const expirationDate = localStorage.getItem('ExpirationDate');
+      if (new Date(expirationDate).getTime() <= new Date().getTime()) {
+        dispatch(logout());
+      } else {
+        dispatch(signinSuccess(localStorage.getItem('UserId'), token));
+        dispatch(autoLogout((new Date(expirationDate).getTime() - new Date().getTime())/1000))
+      }
+    }
+  }
+}

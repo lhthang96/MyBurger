@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom'
+import {connect} from 'react-redux';
+import * as actions from './store/actions/index';
 
 import Layout from './components/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
@@ -12,7 +14,11 @@ import SignIn from './containers/Auth/SignIn/SignIn';
 import SignUp from './containers/Auth/SignUp/SignUp';
 import Logout from './containers/Auth/Logout/Logout';
 
-export default class extends Component {
+class App extends Component {
+  componentDidMount() {
+    this.props.authCheckInit();
+  }
+
   render() {
     return (
       <div>
@@ -33,3 +39,11 @@ export default class extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    authCheckInit: () => dispatch(actions.authCheckInit())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);

@@ -13,5 +13,6 @@ export {
 export {
   signinSend,
   signupSend,
-  logout
+  logout,
+  authCheckInit
 } from './auth'
