@@ -102,8 +102,7 @@ export const signupSend = (email, password) => {
         }
       })
       .catch(err => {
-        console.log(err);
-        dispatch(signupError(err));
+        dispatch(signupError(err.response.data.error));
       })
   }
 }

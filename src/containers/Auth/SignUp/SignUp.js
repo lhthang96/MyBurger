@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
  
@@ -6,6 +7,7 @@ import classes from './SignUp.css';
 
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 class SignUp extends Component {
   state = {
@@ -152,20 +154,38 @@ class SignUp extends Component {
       </div>
     ))
 
+    let form = <Spinner isShow />;
+    const errorMessage = this.props.error ? <p style={{color: 'red'}}>{this.props.error.message}</p> : null;
+
+    if (!this.props.loading) {
+      form = (
+        <form onSubmit={(event) => this.onSignUpSendHandler(event, this.state.inputControls.email.value, this.state.inputControls.password.value)}>
+          {errorMessage}
+          {authForm}
+          <Button
+            btnType='Success'
+          >Submit</Button>
+        </form>
+      )
+    }
 
     return (
       <div className={classes.AuthSection}>
+        {this.props.isAuthenticated ? <Redirect to='/' /> : null }
         <div className={classes.AuthBox}>
           <h3>Sign Up</h3>
-          <form onSubmit={(event) => this.onSignUpSendHandler(event, this.state.inputControls.email.value, this.state.inputControls.password.value)}>
-            {authForm}
-            <Button
-              btnType='Success'
-            >Submit</Button>
-          </form>
+          {form}
         </div>
       </div>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error,
+    isAuthenticated: state.auth.token !== null
   }
 }
 
@@ -175,4 +195,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null,mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

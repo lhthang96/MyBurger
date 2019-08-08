@@ -10,7 +10,7 @@ const initState = {
 }
 
 const signupStart = (state, action) => {
-  return updatedObject(state, {loading: true});
+  return updatedObject(state, {error: null, loading: true});
 }
 
 const signupSuccess = (state, action) => {
@@ -35,7 +35,7 @@ const signupError = (state, action) => {
 }
 
 const signinStart = (state, action) => {
-  return updatedObject(state, {loading: true});
+  return updatedObject(state, {error: null, loading: true});
 }
 
 const signinSuccess = (state, action) => {
