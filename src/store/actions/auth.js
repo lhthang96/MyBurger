@@ -41,7 +41,11 @@ export const signinSend = (email, password) => {
       .then(res => {
         console.log(res);
         if (res.status === 200 || res.status === 201) {
-          dispatch(signinSuccess(res.data.localId, res.data.idToken))
+          localStorage.setItem('Token', res.data.idToken);
+          localStorage.setItem('UserId', res.data.localId);
+          localStorage.setItem('ExpirationDate', new Date(new Date().getTime() + res.data.expiresIn*1000));
+          dispatch(signinSuccess(res.data.localId, res.data.idToken));
+          dispatch(autoLogout(res.data.expiresIn));
         } else {
           dispatch(signinFail(res.data.error));
         }
@@ -104,7 +108,18 @@ export const signupSend = (email, password) => {
 }
 
 export const logout = () => {
+  localStorage.removeItem('Token');
+  localStorage.removeItem('UserId');
+  localStorage.removeItem('ExpirationDate');
   return {
     type: actionTypes.LOGOUT
+  }
+}
+
+export const autoLogout = (expiresTime) => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(logout())
+    },expiresTime*1000)
   }
 }

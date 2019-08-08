@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import classes from './Layout.css';
 
@@ -38,7 +39,7 @@ class Layout extends Component {
             <div className={classes.LogoBox}>
               <Logo brandColor='white' closeSideMenuHandler={this.closeSideMenuHandler} />
             </div>
-            <SideNav closeSideMenuHandler={this.closeSideMenuHandler}/>
+            <SideNav isAuthenticated={this.props.isAuthenticated} closeSideMenuHandler={this.closeSideMenuHandler}/>
           </div>
         </SideDrawer>
         <Toolbar openSideMenuHandler={this.openSideMenuHandler} />
@@ -52,4 +53,10 @@ class Layout extends Component {
   }
 }
 
-export default withRouter(Layout);
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(Layout));
