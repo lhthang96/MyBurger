@@ -10,6 +10,7 @@ import HomePage from './components/Pages/HomePage/HomePage';
 import ContactPage from './components/Pages/ContactPage/ContactPage';
 import SignIn from './containers/Auth/SignIn/SignIn';
 import SignUp from './containers/Auth/SignUp/SignUp';
+import Logout from './containers/Auth/Logout/Logout';
 
 export default class extends Component {
   render() {
@@ -25,6 +26,7 @@ export default class extends Component {
             <Route path='/contact' component={ContactPage} />
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
+            <Route path='/logout' component={Logout} />
           </Layout>
         </BrowserRouter>
       </div>
