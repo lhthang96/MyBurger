@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
  
-import classes from './SignIn.css';
+import classes from './SignUp.css';
 
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 
-class SignIn extends Component {
+class SignUp extends Component {
   state = {
     inputControls: {
       email: {
@@ -41,6 +41,23 @@ class SignIn extends Component {
         rules: {
           required: true,
           minLength: 6
+        }
+      },
+      passwordConfirmed: {
+        elementType: 'input',
+        elementConfig: {
+          placeholder: 'Confirmed password',
+          type: 'password'
+        },
+        label: 'Confirm password',
+        value: '',
+        isTouched: false,
+        shouldValidate: true,
+        isValid: false,
+        errorMessage: [],
+        rules: {
+          required: true,
+          isPasswordConfirm: true
         }
       }
     }
@@ -78,6 +95,13 @@ class SignIn extends Component {
       }
     };
 
+    if (rules.isPasswordConfirm) {
+      if (input !== this.state.inputControls.password.value) {
+        isValid = false;
+        errorMessage.push('Password is not matched.');
+      }
+    }
+
     return ({
       isValid: isValid,
       errorMessage: errorMessage
@@ -98,9 +122,9 @@ class SignIn extends Component {
     this.setState({inputControls: updatedInputControls});
   }
 
-  onSignInSendHandler = (event, email, password) => {
+  onSignUpSendHandler = (event, email, password) => {
     event.preventDefault();
-    this.props.onSignInSend(email, password);
+    this.props.onSignUpSend(email, password);
   }
 
   render () {
@@ -132,8 +156,8 @@ class SignIn extends Component {
     return (
       <div className={classes.AuthSection}>
         <div className={classes.AuthBox}>
-          <h3>Sign In</h3>
-          <form onSubmit={(event) => this.onSignInSendHandler(event, this.state.inputControls.email.value, this.state.inputControls.password.value)}>
+          <h3>Sign Up</h3>
+          <form onSubmit={(event) => this.onSignUpSendHandler(event, this.state.inputControls.email.value, this.state.inputControls.password.value)}>
             {authForm}
             <Button
               btnType='Success'
@@ -147,8 +171,8 @@ class SignIn extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSignInSend: (email, password) => dispatch(actions.signinSend(email, password))
+    onSignUpSend: (email, password) => dispatch(actions.signupSend(email, password))
   }
 }
 
-export default connect(null,mapDispatchToProps)(SignIn);
+export default connect(null,mapDispatchToProps)(SignUp);

@@ -9,6 +9,7 @@ import Feedback from './containers/Feedback/Feedback';
 import HomePage from './components/Pages/HomePage/HomePage';
 import ContactPage from './components/Pages/ContactPage/ContactPage';
 import SignIn from './containers/Auth/SignIn/SignIn';
+import SignUp from './containers/Auth/SignUp/SignUp';
 
 export default class extends Component {
   render() {
@@ -23,6 +24,7 @@ export default class extends Component {
             <Route path='/feedback' component={Feedback} />
             <Route path='/contact' component={ContactPage} />
             <Route path='/signin' component={SignIn} />
+            <Route path='/signup' component={SignUp} />
           </Layout>
         </BrowserRouter>
       </div>

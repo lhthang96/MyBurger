@@ -1,48 +1,94 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 
-export const authStart = () => {
+export const signinStart = () => {
   return {
-    type: actionTypes.AUTH_START
+    type: actionTypes.SIGN_IN_START
   }
 }
 
-export const authSuccess = () => {
+export const signinSuccess = () => {
   return {
-    type: actionTypes.AUTH_SUCCESS
+    type: actionTypes.SIGN_IN_SUCCESS
   }
 }
 
-export const authFail = () => {
+export const signinFail = () => {
   return {
-    type: actionTypes.AUTH_FAIL
+    type: actionTypes.SIGN_IN_FAIL
   }
 }
 
-export const authError = (error) => {
+export const signinError = (error) => {
   return {
-    type: actionTypes.AUTH_ERROR,
+    type: actionTypes.SIGN_IN_ERROR,
     error: error
   }
 }
 
-export const authSend = (email, password) => {
+export const signinSend = (email, password) => {
   return dispatch => {
-    dispatch(authStart());
-    const authData = {
+    dispatch(signinStart());
+    const signinData = {
       email: email,
       password: password
     };
-    axios.post('/signin', authData)
+    axios.post('/signin', signinData)
       .then(res => {
         if (res.status === 200 || res.status === 201) {
-          dispatch(authSuccess())
+          dispatch(signinSuccess())
         } else {
-          dispatch(authFail());
+          dispatch(signinFail());
         }
       })
       .catch(err => {
-        dispatch(authError(err));
+        dispatch(signinError(err));
+      })
+  }
+}
+
+export const signupStart = () => {
+  return {
+    type: actionTypes.SIGN_UP_START
+  }
+}
+
+export const signupSuccess = () => {
+  return {
+    type: actionTypes.SIGN_UP_SUCCESS
+  }
+}
+
+export const signupFail = () => {
+  return {
+    type: actionTypes.SIGN_UP_FAIL
+  }
+}
+
+export const signupError = (error) => {
+  return {
+    type: actionTypes.SIGN_UP_ERROR,
+    error: error
+  }
+}
+
+export const signupSend = (email, password) => {
+  return dispatch => {
+    dispatch(signupStart());
+    const signupData = {
+      email: email,
+      password: password
+    };
+    axios.post('/signup', signupData)
+      .then(res => {
+        if (res.status === 200 || res.status === 201) {
+          dispatch(signupSuccess())
+        } else {
+          dispatch(signupFail());
+        }
+      })
+      .catch(err => {
+        dispatch(signupError(err));
       })
   }
 }
