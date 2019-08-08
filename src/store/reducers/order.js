@@ -15,7 +15,9 @@ const orderSuccess = (state, action) => {
     ordersList: state.ordersList.concat({
       id: action.id,
       orderData: action.orderData
-    })
+    }),
+    error: false,
+    errorMessage: null
   });
 }
 
@@ -34,6 +36,8 @@ const startSendOrder = (state, action) => {
 const fetchOrdersListSuccess = (state, action) => {
   return updatedObject(state, {
     ordersList: action.ordersList,
+    error: false,
+    errorMessage: null,
     loading: false
   })
 }

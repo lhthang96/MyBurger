@@ -21,3 +21,18 @@
 .SectionText {
   margin: 0;
 }
+
+.LightSection {
+  background: #eee;
+  text-align: center;
+}
+
+.SectionItemImage {
+  max-height: 40vh;
+}
+
+@media (max-width: 767px) {
+  .DesktopOnly {
+    display: none;
+  }
+}

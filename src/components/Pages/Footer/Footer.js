@@ -23,7 +23,7 @@ export default () => (
           <div className='col-6 noMargin noPadding'>
             <div className={classes.MoreInfoBox}>
               <Link to='/'><p>Terms of Service</p></Link>
-              <Link to='/'><p>Policy of Privacy</p></Link>
+              <Link to='/'><p>Privacy Policy</p></Link>
             </div>
           </div>
         </div>

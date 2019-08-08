@@ -10,6 +10,7 @@ import OrderForm from '../OrderForm/OrderForm';
 class Checkout extends Component {
 
   render() {
+    window.scrollTo(0,0);
     const CheckoutSection = this.props.storeTotalPrice > 4 ? (
       <div className={classes.CheckoutBox}>
         <CheckoutSummary

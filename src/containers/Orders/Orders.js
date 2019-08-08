@@ -31,11 +31,18 @@ class Orders extends Component {
       )
     }
 
+    const itemColorClass = (status) => {
+      if (status === 'Order received') return classes.DangerItem;
+      if (status === 'Shipping') return classes.PrimaryItem;
+      if (status === 'Canceled') return classes.ErrorItem;
+      return classes.SuccessItem;
+    }
+
     if (this.props.ordersList.length > 0) {
       const list = this.props.ordersList.map(item => {
         return (
           <div className={classes.OrderItem} key={item.id}>
-            <div className={classes.OrderItemContent}>
+            <div className={[classes.OrderItemContent, itemColorClass(item.orderData.status)].join(' ')}>
               <p><strong>Ingredients: </strong>{this.ingredientsList(item.orderData.ingredients)}</p>
               <p><strong>Total Price: </strong>{item.orderData.totalPrice.toFixed(2)} $</p>
               <p><strong>Status: </strong>{item.orderData.status}</p>

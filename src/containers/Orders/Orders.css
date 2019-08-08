@@ -1,6 +1,7 @@
 .OrdersBox {
   display: block;
   width: 100%;
+  min-height: 80vh;
 }
 
 .OrdersBox h3 {
@@ -20,11 +21,32 @@
 }
 
 .OrderItemContent {
-  padding: 12px;
-  border: 1px solid #703B09;
+  padding: 16px 12px 8px;
   padding-left: 20px;
+}
+
+.DangerItem {
+  border: 1px solid #703B09;
   border-left: 8px solid #703B09;
   box-shadow: 2px 0 1px #703B09;
+}
+
+.SuccessItem {
+  border: 1px solid #5C9210;
+  border-left: 8px solid #5C9210;
+  box-shadow: 2px 0 1px #5C9210;
+}
+
+.PrimaryItem {
+  border: 1px solid #38ada9;
+  border-left: 8px solid #38ada9;
+  box-shadow: 2px 0 1px #38ada9;
+}
+
+.ErrorItem {
+  border: 1px solid #e55039;
+  border-left: 8px solid #e55039;
+  box-shadow: 2px 0 1px #e55039;
 }
 
 .OrderItemContent span {
@@ -36,7 +58,7 @@
 
 .noOrderMessageBox {
   width: 100%;
-  height: 60vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
