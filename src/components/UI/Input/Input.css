@@ -8,9 +8,10 @@
   align-items: center;
 }
 
-.InputItem .Label {
+.InputItem label {
   width: 20%;
   text-align: left;
+  margin: 0;
 }
 
 .InputItem .inputElement,
@@ -44,6 +45,7 @@
 }
 
 .ErrorBox p {
+  text-align: left;
   margin: 0;
   font-size: 12px;
   color: red;

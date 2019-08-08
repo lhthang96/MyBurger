@@ -23,6 +23,10 @@ const sideNav = (props) => (
       link='/contact'
       clicked={props.closeSideMenuHandler}
     >Contact</SideNavItem>
+    <SideNavItem 
+      link='/signin'
+      clicked={props.closeSideMenuHandler}
+    >Sign In</SideNavItem>
     <div className={classes.CloseSideNav} onClick={props.closeSideMenuHandler}>
       <i className="fas fa-reply"></i>
       <span>Close</span>

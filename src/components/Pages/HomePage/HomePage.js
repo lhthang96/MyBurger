@@ -1,9 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 
 import classes from './HomePage.css'
 import BurgerStoreImage from '../../../assets/images/burger_store.jpg';
-import ChefSectionImage from '../../../assets/images/chef_section_image.jpg'
+// import ChefSectionImage from '../../../assets/images/chef_section_image.jpg'
 
 export default () => {
   window.scrollTo(0, 0);

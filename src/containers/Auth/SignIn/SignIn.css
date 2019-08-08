@@ -1,0 +1,23 @@
+.AuthSection {
+  min-height: 80vh;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.AuthBox {
+  box-sizing: border-box;
+  padding: 12px 24px;
+  width: 80%;
+  border: 1px solid rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 1px rgba(0,0,0,.5);
+}
+
+.AuthBox form {
+  width: 100%
+}
+
