@@ -7,15 +7,18 @@ export const signinStart = () => {
   }
 }
 
-export const signinSuccess = () => {
+export const signinSuccess = (userId, token) => {
   return {
-    type: actionTypes.SIGN_IN_SUCCESS
+    type: actionTypes.SIGN_IN_SUCCESS,
+    userId: userId,
+    token: token
   }
 }
 
-export const signinFail = () => {
+export const signinFail = (error) => {
   return {
-    type: actionTypes.SIGN_IN_FAIL
+    type: actionTypes.SIGN_IN_FAIL,
+    error: error
   }
 }
 
@@ -31,17 +34,20 @@ export const signinSend = (email, password) => {
     dispatch(signinStart());
     const signinData = {
       email: email,
-      password: password
+      password: password,
+      returnSecureToken: true
     };
-    axios.post('/signin', signinData)
+    axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBY3e98rH3pA4xYbAwYCPF3BQJsdoyn_GU', signinData)
       .then(res => {
+        console.log(res);
         if (res.status === 200 || res.status === 201) {
-          dispatch(signinSuccess())
+          dispatch(signinSuccess(res.data.localId, res.data.idToken))
         } else {
-          dispatch(signinFail());
+          dispatch(signinFail(res.data.error));
         }
       })
       .catch(err => {
+        console.log(err);
         dispatch(signinError(err));
       })
   }
@@ -59,9 +65,10 @@ export const signupSuccess = () => {
   }
 }
 
-export const signupFail = () => {
+export const signupFail = (error) => {
   return {
-    type: actionTypes.SIGN_UP_FAIL
+    type: actionTypes.SIGN_UP_FAIL,
+    error: error
   }
 }
 
@@ -77,10 +84,12 @@ export const signupSend = (email, password) => {
     dispatch(signupStart());
     const signupData = {
       email: email,
-      password: password
+      password: password,
+      returnSecureToken: true
     };
-    axios.post('/signup', signupData)
+    axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBY3e98rH3pA4xYbAwYCPF3BQJsdoyn_GU', signupData)
       .then(res => {
+        console.log(res);
         if (res.status === 200 || res.status === 201) {
           dispatch(signupSuccess())
         } else {
@@ -88,7 +97,14 @@ export const signupSend = (email, password) => {
         }
       })
       .catch(err => {
+        console.log(err);
         dispatch(signupError(err));
       })
+  }
+}
+
+export const logout = () => {
+  return {
+    type: actionTypes.LOGOUT
   }
 }
