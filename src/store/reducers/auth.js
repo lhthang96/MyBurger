@@ -64,7 +64,8 @@ const signinError = (state, action) => {
 const logout = (state, action) => {
   return updatedObject(state, {
     userId: null,
-    token: null
+    token: null,
+    loading: false
   })
 }
 

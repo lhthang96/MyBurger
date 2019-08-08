@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
  
@@ -6,6 +7,7 @@ import classes from './SignIn.css';
 
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 class SignIn extends Component {
   state = {
@@ -17,14 +19,7 @@ class SignIn extends Component {
           type: 'email'
         },
         label: 'Email',
-        value: '',
-        isTouched: false,
-        shouldValidate: true,
-        isValid: false,
-        errorMessage: [],
-        rules: {
-          required: true
-        }
+        value: ''
       },
       password: {
         elementType: 'input',
@@ -33,55 +28,9 @@ class SignIn extends Component {
           type: 'password'
         },
         label: 'Password',
-        value: '',
-        isTouched: false,
-        shouldValidate: true,
-        isValid: false,
-        errorMessage: [],
-        rules: {
-          required: true,
-          minLength: 6
-        }
+        value: ''
       }
     }
-  }
-
-  formValidation = (input, rules) => {
-    let isValid = true;
-    let errorMessage = [];
-
-    if (rules.required) {
-      if (input.trim() === '') {
-        isValid = false;
-        errorMessage.push('This field is required.');
-      }
-    };
-
-    if (rules.minLength) {
-      if (input.length < rules.minLength) {
-        isValid = false;
-        errorMessage.push('Min length is ' + rules.minLength + ' letters.');
-      }
-    };
-
-    if (rules.maxLength) {
-      if (input.length > rules.maxLength) {
-        isValid = false;
-        errorMessage.push('Max length is ' + rules.maxLength + ' letters.');
-      }
-    };
-
-    if (rules.isPhone) {
-      if (input.length > 11 || input.length < 10) {
-        isValid = false;
-        errorMessage.push('Invalid phone number.');
-      }
-    };
-
-    return ({
-      isValid: isValid,
-      errorMessage: errorMessage
-    });
   }
 
   inputChangedHandler = (event, itemId) => {
@@ -89,10 +38,7 @@ class SignIn extends Component {
       ...this.state.inputControls,
       [itemId]: {
         ...this.state.inputControls[itemId],
-        value: event.target.value,
-        isValid: this.formValidation(event.target.value, this.state.inputControls[itemId].rules).isValid,
-        errorMessage: this.formValidation(event.target.value, this.state.inputControls[itemId].rules).errorMessage,
-        isTouched: true
+        value: event.target.value
       }
     }
     this.setState({inputControls: updatedInputControls});
@@ -120,28 +66,37 @@ class SignIn extends Component {
           label={item.config.label}
           value={item.config.value}
           changed={(event) => this.inputChangedHandler(event, item.id)}
-          isTouched={item.config.isTouched}
-          isValid={item.config.isValid}
-          errorMessage={item.config.errorMessage}
-          rules={item.config.rules}
-        />
+          rules={{required: true}} />
       </div>
     ))
 
+    let form = <Spinner isShow />;
+
+    if (!this.props.loading) {
+      form = <form onSubmit={(event) => this.onSignInSendHandler(event, this.state.inputControls.email.value, this.state.inputControls.password.value)}>
+                {authForm}
+                <Button
+                  btnType='Success'
+                >Submit</Button>
+              </form>
+    }
 
     return (
       <div className={classes.AuthSection}>
+        {this.props.isAuthenticated ? <Redirect to='/' /> : null}
         <div className={classes.AuthBox}>
           <h3>Sign In</h3>
-          <form onSubmit={(event) => this.onSignInSendHandler(event, this.state.inputControls.email.value, this.state.inputControls.password.value)}>
-            {authForm}
-            <Button
-              btnType='Success'
-            >Submit</Button>
-          </form>
+          {form}
         </div>
       </div>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading,
+    isAuthenticated: state.token !== null
   }
 }
 
@@ -151,4 +106,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null,mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps,mapDispatchToProps)(SignIn);
