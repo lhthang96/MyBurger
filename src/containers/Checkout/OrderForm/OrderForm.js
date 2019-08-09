@@ -5,6 +5,7 @@ import * as actions from '../../../store/actions/index';
 import axios from '../../../axios';  
 
 import classes from './OrderForm.css';
+import {formValidation} from '../../../store/utility'
 
 import Auxiliary from '../../../hoc/Auxiliary/Auxiliary';
 import withNotifHandler from '../../../hoc/WithNotifHandler/WithNotifHandler';
@@ -92,44 +93,6 @@ class OrderForm extends Component {
     isShowOrderSummary: false,
   }
 
-  formValidation = (input, rules) => {
-    let isValid = true;
-    let errorMessage = [];
-
-    if (rules.required) {
-      if (input.trim() === '') {
-        isValid = false;
-        errorMessage.push('This field is required.');
-      }
-    };
-
-    if (rules.minLength) {
-      if (input.length < rules.minLength) {
-        isValid = false;
-        errorMessage.push('Min length is ' + rules.minLength + ' letters.');
-      }
-    };
-
-    if (rules.maxLength) {
-      if (input.length > rules.maxLength) {
-        isValid = false;
-        errorMessage.push('Max length is ' + rules.maxLength + ' letters.');
-      }
-    };
-
-    if (rules.isPhone) {
-      if (input.length > 11 || input.length < 10) {
-        isValid = false;
-        errorMessage.push('Invalid phone number.');
-      }
-    };
-
-    return ({
-      isValid: isValid,
-      errorMessage: errorMessage
-    });
-  }
-
   inputChangedHandler = (event, inputIdentify) => {
     const updatedOrderForm = {
       ...this.state.orderForm
@@ -145,7 +108,7 @@ class OrderForm extends Component {
       errorMessage: []
     };
     if (updatedFormElement.shouldValidate) {
-      checkedValue = this.formValidation(updatedFormElement.value, updatedFormElement.rules);
+      checkedValue = formValidation(updatedFormElement.value, updatedFormElement.rules);
     }
 
     updatedFormElement.isTouched = true;

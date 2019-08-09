@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
  
 import classes from './SignUp.css';
+import {formValidation} from '../../../store/utility';
 
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
@@ -65,59 +66,14 @@ class SignUp extends Component {
     }
   }
 
-  formValidation = (input, rules) => {
-    let isValid = true;
-    let errorMessage = [];
-
-    if (rules.required) {
-      if (input.trim() === '') {
-        isValid = false;
-        errorMessage.push('This field is required.');
-      }
-    };
-
-    if (rules.minLength) {
-      if (input.length < rules.minLength) {
-        isValid = false;
-        errorMessage.push('Min length is ' + rules.minLength + ' letters.');
-      }
-    };
-
-    if (rules.maxLength) {
-      if (input.length > rules.maxLength) {
-        isValid = false;
-        errorMessage.push('Max length is ' + rules.maxLength + ' letters.');
-      }
-    };
-
-    if (rules.isPhone) {
-      if (input.length > 11 || input.length < 10) {
-        isValid = false;
-        errorMessage.push('Invalid phone number.');
-      }
-    };
-
-    if (rules.isPasswordConfirm) {
-      if (input !== this.state.inputControls.password.value) {
-        isValid = false;
-        errorMessage.push('Password is not matched.');
-      }
-    }
-
-    return ({
-      isValid: isValid,
-      errorMessage: errorMessage
-    });
-  }
-
   inputChangedHandler = (event, itemId) => {
     const updatedInputControls = {
       ...this.state.inputControls,
       [itemId]: {
         ...this.state.inputControls[itemId],
         value: event.target.value,
-        isValid: this.formValidation(event.target.value, this.state.inputControls[itemId].rules).isValid,
-        errorMessage: this.formValidation(event.target.value, this.state.inputControls[itemId].rules).errorMessage,
+        isValid: formValidation(event.target.value, this.state.inputControls[itemId].rules, this.state.inputControls.password.value).isValid,
+        errorMessage: formValidation(event.target.value, this.state.inputControls[itemId].rules).errorMessage,
         isTouched: true
       }
     }
