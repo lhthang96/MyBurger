@@ -85,9 +85,19 @@ class SignIn extends Component {
       )
     }
 
+    let redirect = null;
+
+    if (this.props.isAuthenticated) {
+      if (this.props.building) {
+        redirect = <Redirect to='/burger-builder/checkout' />
+      } else {
+        redirect = <Redirect to ='/' />
+      }
+    }
+
     return (
       <div className={classes.AuthSection}>
-        {this.props.isAuthenticated ? <Redirect to='/' /> : null}
+        {redirect}
         <div className={classes.AuthBox}>
           <h3>Sign In</h3>
           {form}
@@ -101,7 +111,8 @@ const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
     isAuthenticated: state.auth.token !== null,
-    error: state.auth.error
+    error: state.auth.error,
+    building: state.burgerBuilder.building
   }
 }
 
