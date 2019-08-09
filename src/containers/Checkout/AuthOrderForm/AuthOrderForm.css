@@ -1,0 +1,44 @@
+.AuthOrderForm {
+  width: 60%;
+  box-sizing: border-box;
+  padding: 16px 32px;
+}
+
+.AuthOrderInfoBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.AuthOrderInfoBox p {
+  width: 100%;
+  text-align: center;
+}
+
+.AuthOrderInfoCard {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  border: 1px solid rgba(0,0,0,.7);
+  box-shadow: 1px 1px 1px rgba(0,0,0,.5);
+}
+
+.AuthOrderInfoCard h4 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.AuthOrderInfoCard p {
+  text-align: left;
+}
+
+.ButtonBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

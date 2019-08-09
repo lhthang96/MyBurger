@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
-import * as actions from '../../store/actions/index';
-import axios from '../../axios';
+import * as actions from '../../../store/actions/index';
+import axios from '../../../axios';  
 
 import classes from './OrderForm.css';
 
-import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
-import withNotifHandler from '../../hoc/WithNotifHandler/WithNotifHandler';
+import Auxiliary from '../../../hoc/Auxiliary/Auxiliary';
+import withNotifHandler from '../../../hoc/WithNotifHandler/WithNotifHandler';
 
-import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
-import Button from '../../components/UI/Button/Button';
-import Input from '../../components/UI/Input/Input';
-import Modal from '../../components/UI/Modal/Modal';
-import Spinner from '../../components/UI/Spinner/Spinner';
+import OrderSummary from '../../../components/Burger/OrderSummary/OrderSummary';
+import Button from '../../../components/UI/Button/Button';
+import Input from '../../../components/UI/Input/Input';
+import Modal from '../../../components/UI/Modal/Modal';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 class OrderForm extends Component {
   state = {
@@ -268,8 +268,6 @@ class OrderForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.burgerBuilder.ingredients,
-    totalPrice: state.burgerBuilder.totalPrice,
     loading: state.order.sendLoading,
     token: state.auth.token,
     userId: state.auth.userId

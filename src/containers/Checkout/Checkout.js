@@ -5,21 +5,25 @@ import {connect} from 'react-redux';
 import classes from './Checkout.css';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
-import OrderForm from '../OrderForm/OrderForm';
+import OrderForm from './OrderForm/OrderForm';
+import AuthOrderForm from './AuthOrderForm/AuthOrderForm';
 
 class Checkout extends Component {
 
   render() {
     window.scrollTo(0,0);
+
+    const orderForm = this.props.isAuthenticated ?
+      <AuthOrderForm ingredients={this.props.storeIngredients} totalPrice={this.props.storeTotalPrice} /> :
+      <OrderForm ingredients={this.props.storeIngredients} totalPrice={this.props.storeTotalPrice} />
+
     const CheckoutSection = this.props.storeTotalPrice > 4 ? (
       <div className={classes.CheckoutBox}>
         <CheckoutSummary
           ingredients={this.props.storeIngredients}
           totalPrice={this.props.storeTotalPrice} />
           
-        <OrderForm
-          ingredients={this.props.storeIngredients}
-          totalPrice={this.props.storeTotalPrice} />
+        {orderForm}
       </div>
     ) :
     (
@@ -36,7 +40,8 @@ class Checkout extends Component {
 const mapStateToProps = state => {
   return {
     storeIngredients: state.burgerBuilder.ingredients,
-    storeTotalPrice: state.burgerBuilder.totalPrice
+    storeTotalPrice: state.burgerBuilder.totalPrice,
+    isAuthenticated: state.auth.token !== null
   }
 }
 
