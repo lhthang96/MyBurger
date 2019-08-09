@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 import axios from '../../../axios';  
@@ -244,7 +244,7 @@ class OrderForm extends Component {
           </form>
 
           <div className={classes.SigninText}>
-            <p>Please <span>Sign In</span> or fill out all your contact info to submit the order</p>
+            <p>Please <span><Link to='/signin' className={classes.SuccessText}>Sign In</Link></span> or fill out all your contact info to submit the order</p>
           </div>
 
           <div className={classes.BtnBox}>

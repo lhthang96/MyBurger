@@ -70,3 +70,14 @@
   color: #5C9210;
   font-weight: 600;
 }
+
+.SuccessText {
+  text-decoration: none;
+  color: #5C9210;
+  font-weight: 600;
+}
+
+.SuccessText:hover {
+  text-decoration: none;
+  color: #5C9210;
+}

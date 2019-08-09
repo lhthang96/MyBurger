@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import classes from './Checkout.css';
@@ -7,6 +7,7 @@ import classes from './Checkout.css';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import OrderForm from './OrderForm/OrderForm';
 import AuthOrderForm from './AuthOrderForm/AuthOrderForm';
+import DoneOrder from './DoneOrder/DoneOrder';
 
 class Checkout extends Component {
 
@@ -17,7 +18,7 @@ class Checkout extends Component {
       <AuthOrderForm ingredients={this.props.storeIngredients} totalPrice={this.props.storeTotalPrice} /> :
       <OrderForm ingredients={this.props.storeIngredients} totalPrice={this.props.storeTotalPrice} />
 
-    const CheckoutSection = this.props.storeTotalPrice > 4 ? (
+    const CheckoutSection = (
       <div className={classes.CheckoutBox}>
         <CheckoutSummary
           ingredients={this.props.storeIngredients}
@@ -25,15 +26,19 @@ class Checkout extends Component {
           
         {orderForm}
       </div>
-    ) :
-    (
-      <div className={classes.NotifBox}>
-        <p className={classes.deliText}>Your order was send to us. We will deliver to you as soon as possible.<span><i className="fas fa-shipping-fast fa-2x"></i></span></p>
-        <p> Lets check the <span><Link to='/orders' className={classes.SuccessText}>Orders list</Link></span> or <span><Link to='/burger-builder' className={classes.SuccessText}>Build</Link></span> another burger.</p>
-      </div>
-    )
+    );
 
-    return CheckoutSection;
+    let content = <DoneOrder isAuthenticated={this.props.isAuthenticated} />;
+
+    if (!this.props.building && !this.props.doneBuilt) {
+      content = <Redirect to='/burger-builder' />
+    }
+
+    if (this.props.building && !this.props.doneBuilt) {
+      content = CheckoutSection;
+    }
+
+    return content;
   }
 }
 
@@ -41,7 +46,9 @@ const mapStateToProps = state => {
   return {
     storeIngredients: state.burgerBuilder.ingredients,
     storeTotalPrice: state.burgerBuilder.totalPrice,
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
+    building: state.burgerBuilder.building,
+    doneBuilt: state.burgerBuilder.doneBuilt
   }
 }
 

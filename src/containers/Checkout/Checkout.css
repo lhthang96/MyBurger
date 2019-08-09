@@ -30,31 +30,3 @@
 .Hide {
   display: none;
 }
-
-.NotifBox {
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.NotifBox .deliText {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.NotifBox .deliText span {
-  margin-left: 8px;
-}
-
-.NotifBox p {
-  text-align: center;
-}
-
-.NotifBox .SuccessText {
-  text-decoration: none;
-  font-weight: 600;
-  color: #5C9210;
-}
