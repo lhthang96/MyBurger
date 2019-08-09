@@ -40,7 +40,7 @@ export const sendOrder = (orderData) => {
 export const fetchOrdersListSuccess = (list) => {
   return {
     type: actionTypes.FETCH_ORDERS_LIST_SUCCESS,
-    ordersList: list.reverse()
+    ordersList: list
   }
 }
 
@@ -48,6 +48,12 @@ export const fetchOrdersListFail = (error) => {
   return {
     type: actionTypes.FETCH_ORDERS_LIST_FAIL,
     error: error
+  }
+}
+
+export const resetOrdersList = () => {
+  return {
+    type: actionTypes.RESET_ORDERS_LIST
   }
 }
 

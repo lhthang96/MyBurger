@@ -7,7 +7,8 @@ export {
 
 export {
   sendOrder,
-  fetchOrdersList
+  fetchOrdersList,
+  resetOrdersList
 } from './order'
 
 export {

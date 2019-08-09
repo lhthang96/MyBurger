@@ -8,6 +8,7 @@ class Logout extends Component {
 
   componentDidMount() {
     this.props.logout();
+    this.props.resetOrdersList();
   }
 
   render() {
@@ -19,7 +20,8 @@ class Logout extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    logout: () => dispatch(actions.logout())
+    logout: () => dispatch(actions.logout()),
+    resetOrdersList: () => dispatch(actions.resetOrdersList())
   }
 }
 

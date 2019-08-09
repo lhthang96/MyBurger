@@ -45,6 +45,7 @@ export const signinSend = (email, password) => {
           localStorage.setItem('UserId', res.data.localId);
           localStorage.setItem('ExpirationDate', new Date(new Date().getTime() + res.data.expiresIn*1000));
           dispatch(signinSuccess(res.data.localId, res.data.idToken));
+          dispatch(actions.fetchOrdersList(res.data.localId));
           dispatch(autoLogout(res.data.expiresIn));
         } else {
           dispatch(signinFail(res.data.error));
