@@ -13,8 +13,14 @@ class Logout extends Component {
 
   render() {
     return (
-      <Redirect to='/' />
+      this.props.building ? <Redirect to='/burger-builder/checkout' /> : <Redirect to='/' />
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    building: state.burgerBuilder.building
   }
 }
 
@@ -25,4 +31,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Logout);
+export default connect(mapStateToProps, mapDispatchToProps)(Logout);
