@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import * as actions from '../actions/index';
 import axios from '../../axios';
 
 export const signinStart = () => {
@@ -131,7 +132,8 @@ export const authCheckInit = () => {
         dispatch(logout());
       } else {
         dispatch(signinSuccess(localStorage.getItem('UserId'), token));
-        dispatch(autoLogout((new Date(expirationDate).getTime() - new Date().getTime())/1000))
+        dispatch(autoLogout((new Date(expirationDate).getTime() - new Date().getTime())/1000));
+        dispatch(actions.fetchOrdersList(localStorage.getItem('UserId')));
       }
     }
   }

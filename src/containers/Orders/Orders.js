@@ -12,15 +12,6 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Orders extends Component {
 
-  componentDidMount() {
-    if (this.unmount) return;
-    this.props.initOrdersList();
-  }
-
-  componentWillUnmount () {
-    this.unmount = true;
-  }
-
   showOrdersList = () => {
     if (this.props.error) {
       return (
@@ -54,7 +45,7 @@ class Orders extends Component {
     } return (
       <div className={classes.noOrderMessageBox}>
         <p className={classes.noOrdersMessage}>You don't have any orders.</p>
-        <p><span><Link to='/burger-builder' className={classes.noOrderLink}>Build a burger</Link></span> to order now?</p>
+        <p><span><Link to='/burger-builder' className={classes.SuccessText}>Build a burger</Link></span> to order now?</p>
       </div>
     ) ;
   }
@@ -104,13 +95,14 @@ const mapStateToProps = state => {
     loading: state.order.loading,
     error: state.order.error,
     errorMessage: state.order.errorMessage,
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
+    userId: state.auth.userId
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    initOrdersList: () => dispatch(actions.fetchOrdersList())
+    initOrdersList: (userId) => dispatch(actions.fetchOrdersList(userId))
   }
 }
 

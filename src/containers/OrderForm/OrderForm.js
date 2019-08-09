@@ -186,7 +186,12 @@ class OrderForm extends Component {
       status: 'Order received'
     }
 
-    this.props.sendOrder(order);
+    const updatedOrderData = {
+      ...order,
+      userId: this.props.userId ? this.props.userId : 'Anonymous'
+    };
+
+    this.props.sendOrder(updatedOrderData);
   }
 
   cancelOrderHandler = () => {
@@ -265,7 +270,9 @@ const mapStateToProps = state => {
   return {
     ingredients: state.burgerBuilder.ingredients,
     totalPrice: state.burgerBuilder.totalPrice,
-    loading: state.order.sendLoading
+    loading: state.order.sendLoading,
+    token: state.auth.token,
+    userId: state.auth.userId
   }
 }
 
