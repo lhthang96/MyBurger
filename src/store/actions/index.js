@@ -17,3 +17,8 @@ export {
   logout,
   authCheckInit
 } from './auth'
+
+export {
+  pageLoaded,
+  pageLoading
+} from './page';

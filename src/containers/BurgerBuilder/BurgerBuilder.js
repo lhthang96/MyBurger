@@ -71,7 +71,7 @@ class BurgerBuilder extends Component {
           goCheckout={this.goCheckout} />
 
       </Auxiliary> :
-      <Spinner isShow/>
+      <div style={{width:'100%', minHeight: '80vh',display:'flex',justifyContent:'center',alignItems:'center'}}><Spinner isShow /></div>
     );
   }
 }

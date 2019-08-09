@@ -24,3 +24,6 @@ export const SIGN_IN_FAIL = 'SIGN_IN_FAIL';
 export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 
 export const LOGOUT = 'LOGOUT';
+
+export const PAGE_LOADING = 'PAGE_LOADING';
+export const PAGE_LOADED = 'PAGE_LOADED';
