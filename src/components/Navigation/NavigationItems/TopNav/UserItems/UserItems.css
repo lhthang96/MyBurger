@@ -7,3 +7,9 @@
   align-items: center;
   list-style: none;
 }
+
+@media (max-width: 767px) {
+  .UserItems {
+    display: none;
+  }
+}

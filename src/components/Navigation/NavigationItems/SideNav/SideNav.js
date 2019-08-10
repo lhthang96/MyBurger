@@ -32,10 +32,12 @@ const sideNav = (props) => (
         <SideNavItem 
           link='/signin'
           clicked={props.closeSideMenuHandler}
+          isMobileOnly
         >Sign In</SideNavItem>
         <SideNavItem 
           link='/signup'
           clicked={props.closeSideMenuHandler}
+          isMobileOnly
         >Sign Up</SideNavItem>
       </Auxiliary>} 
 

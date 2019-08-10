@@ -17,3 +17,9 @@
   text-decoration: none;
   background: #8F5C2C;
 }
+
+@media (min-width: 768px) {
+  .MobileOnly {
+    display: none;
+  }
+}
