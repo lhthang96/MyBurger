@@ -42,7 +42,7 @@ class Layout extends Component {
             <SideNav isAuthenticated={this.props.isAuthenticated} closeSideMenuHandler={this.closeSideMenuHandler}/>
           </div>
         </SideDrawer>
-        <Toolbar openSideMenuHandler={this.openSideMenuHandler} />
+        <Toolbar openSideMenuHandler={this.openSideMenuHandler} isAuthenticated={this.props.isAuthenticated} />
         <main className={classes.Content}>
           {this.props.children}
         </main>

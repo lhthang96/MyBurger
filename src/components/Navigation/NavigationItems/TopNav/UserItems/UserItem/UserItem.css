@@ -1,0 +1,31 @@
+.UserItem {
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.UserItemLink {
+  box-sizing: border-box;
+  padding: 5px 10px;
+  margin-right: 12px;
+  font-family: 'Gochi Hand';
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+  border-radius: 5px;
+}
+
+.UserItemLink:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.SuccessItem {
+  background: #5C9210;
+}
+
+.DangerItem {
+  background: #944317;
+}
