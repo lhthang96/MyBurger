@@ -39,6 +39,7 @@
 }
 
 .ErrorBox {
+  margin-top: 4px;
   width: 100%;
   box-sizing: border-box;
   padding-left: 28%;
@@ -71,5 +72,9 @@
   .InputItem .inputElement,
   .InputItem .selectElement {
     width: 100%;
+  }
+
+  .ErrorBox {
+    padding-left: 8px;
   }
 }

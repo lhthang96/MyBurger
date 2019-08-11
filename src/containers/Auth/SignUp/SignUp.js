@@ -129,12 +129,14 @@ class SignUp extends Component {
 
     let form = <Spinner isShow />;
     const errorMessage = this.props.error ? <p style={{color: 'red'}}>{this.props.error}</p> : null;
+    const instructionText = this.onCheckFormValid() ? null : <p className={classes.instructionText}>* Fill out all the required fields to submit</p>;
 
     if (!this.props.loading) {
       form = (
         <form onSubmit={(event) => this.onSignUpSendHandler(event, this.state.inputControls.email.value, this.state.inputControls.password.value)}>
           {errorMessage}
           {authForm}
+          {instructionText}
           <Button
             btnType='Success'
             disabled={!this.onCheckFormValid()}
