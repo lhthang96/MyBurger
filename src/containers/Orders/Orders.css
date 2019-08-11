@@ -95,6 +95,7 @@
 .NotAuthMessageBox {
   width: 100%;
   height: 100%;
+  margin-top: 32px;
   display: flex;
   justify-content: center;
   align-items: center;

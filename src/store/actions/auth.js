@@ -83,6 +83,13 @@ export const signupError = (error) => {
   }
 }
 
+export const signupReset = () => {
+  console.log('Sign up Reset Action Store...')
+  return {
+    type: actionTypes.SIGN_UP_RESET
+  }
+}
+
 export const signupSend = (email, password) => {
   return dispatch => {
     dispatch(signupStart());

@@ -40,6 +40,13 @@ const signupError = (state, action) => {
   })
 }
 
+const signupReset = (state, action) => {
+  console.log('Sign up reset Reducer...');
+  return updatedObject(state, {
+    signupSuccess: false
+  })
+}
+
 const signinStart = (state, action) => {
   return updatedObject(state, {error: null, loading: true});
 }
@@ -82,6 +89,7 @@ export default (state = initState, action) => {
     case actionTypes.SIGN_UP_SUCCESS: return signupSuccess(state, action);
     case actionTypes.SIGN_UP_FAIL: return signupFail(state, action);
     case actionTypes.SIGN_UP_ERROR: return signupError(state, action);
+    case actionTypes.SIGN_UP_RESET: return signupReset(state, action);
 
     // Sign In cases
     case actionTypes.SIGN_IN_START: return signinStart(state, action);

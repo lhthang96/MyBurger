@@ -66,6 +66,23 @@ class SignUp extends Component {
     }
   }
 
+  componentDidMount() {
+    console.log('Sign up did mount...');
+    this.props.signupReset();
+  }
+
+  onCheckFormValid = () => {
+    const checkForm = {
+      ...this.state.inputControls
+    };
+    for (let key in checkForm) {
+      if (!checkForm[key].isValid) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   inputChangedHandler = (event, itemId) => {
     const updatedInputControls = {
       ...this.state.inputControls,
@@ -76,7 +93,7 @@ class SignUp extends Component {
         errorMessage: formValidation(event.target.value, this.state.inputControls[itemId].rules).errorMessage,
         isTouched: true
       }
-    }
+    };
     this.setState({inputControls: updatedInputControls});
   }
 
@@ -120,6 +137,7 @@ class SignUp extends Component {
           {authForm}
           <Button
             btnType='Success'
+            disabled={!this.onCheckFormValid()}
           >Submit</Button>
         </form>
       )
@@ -156,7 +174,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSignUpSend: (email, password) => dispatch(actions.signupSend(email, password))
+    onSignUpSend: (email, password) => dispatch(actions.signupSend(email, password)),
+    signupReset: () => dispatch(actions.signupReset())
   }
 }
 

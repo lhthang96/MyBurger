@@ -14,6 +14,7 @@ export {
 export {
   signinSend,
   signupSend,
+  signupReset,
   logout,
   authCheckInit
 } from './auth'
