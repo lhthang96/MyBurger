@@ -15,6 +15,13 @@ export const removeIngredient = (ingredientType) => {
   }
 }
 
+// Combo ingredients for specific burger
+export const burgerComboStandard = () => {
+  return {
+    type: actionTypes.BURGER_COMBO_STANDARD
+  }
+}
+
 export const resetIngredient = () => {
   return {
     type: actionTypes.RESET_INGREDIENTS

@@ -3,6 +3,9 @@ export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT';
 export const RESET_INGREDIENTS = 'RESET_INGREDIENTS';
 export const INIT_INGREDIENTS = 'INIT_INGREDIENTS';
 
+// Combo for specific burger
+export const BURGER_COMBO_STANDARD = 'BURGER_COMBO_STANDARD';
+
 export const SEND_ORDER = 'SEND_ORDER';
 export const START_SEND_ORDER = 'START_SEND_ORDER';
 export const ORDER_SUCCESS = 'ORDER_SUCCESS';

@@ -16,6 +16,10 @@ const controls = [
 const buildControls = (props) => (
   <div className={classes.BuildControls}>
     <p>Current Price: <strong>{props.totalPrice.toFixed(2)} $</strong></p>
+    <div className={classes.ResetIngredientsBox}>
+      <p onClick={props.resetIngredient} style={{color:'#703B09'}} >Reset</p>
+      <p onClick={props.burgerComboStandard} style={{color:'#2f4e03'}} >Standard burger</p>
+    </div>
     {controls.map(item => {
       return <BuildControl
         key={item.label}
@@ -25,7 +29,6 @@ const buildControls = (props) => (
         isDisabled = {props.disabledRemoved[item.type]} />
     })}
 
-    <p onClick={props.resetIngredient}>Reset</p>
 
     <button
       className={classes.OrderButton}
@@ -39,7 +42,8 @@ const mapDispatchToProps = dispatch => {
   return {
     addIngredient: (ingredientType) => dispatch(actions.addIngredient(ingredientType)),
     removeIngredient: (ingredientType) => dispatch(actions.removeIngredient(ingredientType)),
-    resetIngredient: () => dispatch(actions.resetIngredient())
+    resetIngredient: () => dispatch(actions.resetIngredient()),
+    burgerComboStandard: () => dispatch(actions.burgerComboStandard())
   }
 }
 

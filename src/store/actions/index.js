@@ -2,6 +2,7 @@ export {
   addIngredient,
   removeIngredient,
   resetIngredient,
+  burgerComboStandard,
   fetchIngredients
 } from './burgerBuilder';
 

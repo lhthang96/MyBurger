@@ -39,6 +39,26 @@ const removeIngredient = (state, action) => {
   return updatedObject(state, updatedState);
 }
 
+// Combo ingredients for specific burger
+const burgerComboStandard = (state, action) => {
+  const updatedIngredients = {
+    ...state.ingredients
+  }
+
+  for (let key in updatedIngredients) {
+    updatedIngredients[key] = 1
+  }
+
+  const updatedState = {
+    ingredients: updatedIngredients,
+    totalPrice: 6.9,
+    building: true,
+    doneBuilt: false
+  }
+
+  return updatedObject(state, updatedState);
+}
+
 const resetIngredients = (state, action) => {
   const updatedIngredients = {
     ...state.ingredients
@@ -70,6 +90,9 @@ export default (state = initState, action) => {
 
     case actionTypes.REMOVE_INGREDIENT:
       return removeIngredient(state, action);
+
+    case actionTypes.BURGER_COMBO_STANDARD:
+      return burgerComboStandard(state, action);
 
     case actionTypes.RESET_INGREDIENTS:
       return resetIngredients(state, action);

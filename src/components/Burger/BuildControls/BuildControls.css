@@ -9,6 +9,20 @@
   padding: 10px 0;
 }
 
+.ResetIngredientsBox {
+  display: flex;
+  width: 300px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.ResetIngredientsBox p {
+  padding: 4px 8px;
+  font-weight: 600;
+  margin: 0 8px;
+  cursor: pointer;
+}
+
 .OrderButton {
   background-color: #DAD735;
   outline: none;
