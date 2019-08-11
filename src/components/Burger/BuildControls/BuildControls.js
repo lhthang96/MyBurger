@@ -13,30 +13,32 @@ const controls = [
   {label: 'Salad', type: 'salad'}
 ];
 
-const buildControls = (props) => (
-  <div className={classes.BuildControls}>
-    <p>Current Price: <strong>{props.totalPrice.toFixed(2)} $</strong></p>
-    <div className={classes.ResetIngredientsBox}>
-      <p onClick={props.resetIngredient} style={{color:'#703B09'}} >Reset</p>
-      <p onClick={props.burgerComboStandard} style={{color:'#2f4e03'}} >Standard burger</p>
+const buildControls = (props) => {
+  console.log(props.ingredients);
+  return (
+    <div className={classes.BuildControls}>
+      <p>Current Price: <strong>{props.totalPrice.toFixed(2)} $</strong></p>
+      <div className={classes.ResetIngredientsBox}>
+        <p onClick={props.resetIngredient} style={{color:'#703B09'}} >Reset</p>
+        <p onClick={props.burgerComboStandard} style={{color:'#2f4e03'}} >Standard burger</p>
+      </div>
+      {controls.map(item => {
+        return <BuildControl
+          key={item.label}
+          label={item.label + ' (' + props.ingredients[item.type] + ') '}
+          added={() => props.addIngredient(item.type)}
+          removed = {() => props.removeIngredient(item.type)}
+          isDisabled = {props.disabledRemoved[item.type]} />
+      })}
+  
+      <button
+        className={classes.OrderButton}
+        disabled={!props.readyToOrder}
+        onClick={props.goCheckout}
+      >CHECKOUT</button>
     </div>
-    {controls.map(item => {
-      return <BuildControl
-        key={item.label}
-        label={item.label}
-        added={() => props.addIngredient(item.type)}
-        removed = {() => props.removeIngredient(item.type)}
-        isDisabled = {props.disabledRemoved[item.type]} />
-    })}
-
-
-    <button
-      className={classes.OrderButton}
-      disabled={!props.readyToOrder}
-      onClick={props.goCheckout}
-    >CHECKOUT</button>
-  </div>
-);
+  );
+} 
 
 const mapDispatchToProps = dispatch => {
   return {

@@ -63,6 +63,7 @@ class BurgerBuilder extends Component {
         <Burger ingredients={this.props.storeIngredients} isScroll />
 
         <BuildControls 
+          ingredients={this.props.storeIngredients}
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved = {this.removeIngredientHandler}
           disabledRemoved = {disabledRemoved}

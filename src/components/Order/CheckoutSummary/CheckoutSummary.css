@@ -14,11 +14,14 @@
 .BurgerInfoBox h4 {
   margin: 0;
   padding: 8px;
+  text-align: center;
 }
 
 .IngredientInfoBox {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .IngredientInfoBox span {
@@ -43,6 +46,10 @@
   margin: 0;
   padding: 8px;
   font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .BurgerInfoBox p span {
