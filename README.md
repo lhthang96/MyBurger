@@ -1,8 +1,28 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+------------------------- MyBurger -------------------------
 
-## Available Scripts
 
-In the project directory, you can run:
+## Description
+
+MyBurger is the project which is based on the Burger project on the Udemy course of Maximilian Schwarzmüller: React - The Complete Guide (incl Hooks, React Router, Redux), course url: https://www.udemy.com/react-the-complete-guide-incl-redux/.
+In this project I've adjust some use cases, but the core concept is unchanged.
+
+This project demonstrates a web apps to serve the clients order their favourite burger by the fascinating way on their own ( I just used CSS to illustrate the burger and its ingredients: bacon, cheese, meat and salad ), then checkout and order. I also added the user functions (Sign in and Sign out) to this project.
+
+All the project is just focus on front-end process, back-end I simply used Firebase as an awesome server to store my necessary data.
+
+## Goals
+
+This project is the good way to deep dive in React, I've learned a lot :
+- Understand the 'create-react-apps' structure.
+- Deep dive in React component: props and state, life cycles hook,...
+- HTTP requests with 'axios'.
+- React routing.
+- Form validations & Authentications.
+- And of course, use 'redux' to manage states.
+
+## How to run
+
+I used 'create-react-app' to build, so all the 'npm' commands is the same as default:
 
 ### `npm start`
 
@@ -37,32 +57,6 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Future works
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+In future, I will continue to add more new features such as: Feedback, Order more than 1 burger, more combo options,... as the way to improve my React skill.
