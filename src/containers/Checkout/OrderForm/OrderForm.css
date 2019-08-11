@@ -1,5 +1,5 @@
 .OrderFormBox {
-  width: 60%;
+  width: 100%;
 }
 
 .OrderFormBox h2 {
@@ -59,6 +59,7 @@
 .SigninText {
   width: 100%;
   text-align: center;
+  padding: 12px;
 }
 
 .SigninText p {

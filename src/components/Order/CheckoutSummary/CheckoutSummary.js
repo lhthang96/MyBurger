@@ -21,18 +21,18 @@ const checkoutSummary = (props) => {
 
   return (
     <div className={classes.CheckoutSummary}>
-      <h2>Your Burger</h2>
-      <Burger
-        ingredients={props.ingredients}
-      />
+      <div className={classes.BurgerBox}>
+        <h2>Your Burger</h2>
+        <Burger
+          ingredients={props.ingredients}
+        />
+      </div>
       <div className={classes.BurgerInfoBox}>
         <h4>Your ingredients:</h4>
         
         <div className={classes.IngredientInfoBox}>
           {IngredientItems}
         </div>
-
-        <p>Total Price: <span>{props.totalPrice.toFixed(2)} $</span></p>
       </div>
     </div>
   )

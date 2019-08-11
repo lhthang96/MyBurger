@@ -1,12 +1,16 @@
 .CheckoutBox {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
 }
 
-.OrderFormBox {
-  width: 60%
+.CheckoutFormBox {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .SpinnerBox {
@@ -29,4 +33,11 @@
 
 .Hide {
   display: none;
+}
+
+@media (max-width: 767px) {
+  .CheckoutFormBox {
+    width: 100%;
+    margin-top: 48px;
+  }
 }

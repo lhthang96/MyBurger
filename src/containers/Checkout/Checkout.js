@@ -24,7 +24,9 @@ class Checkout extends Component {
           ingredients={this.props.storeIngredients}
           totalPrice={this.props.storeTotalPrice} />
           
-        {orderForm}
+        <div className={classes.CheckoutFormBox}>
+          {orderForm}
+        </div>
       </div>
     );
 
