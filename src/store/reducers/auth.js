@@ -2,12 +2,25 @@ import * as actionTypes from '../actions/actionTypes';
 
 import {updatedObject} from '../utility';
 
+const errorMessageTranslator = (errorCode) => {
+  switch (errorCode) {
+    case 'EMAIL_EXISTS': return 'This email is already in use';
+    case 'EMAIL_NOT_FOUND': return "This email doesn't exist";
+    case 'INVALID_PASSWORD': return 'Password is incorrect';
+    default: return 'Invalid email or password'
+  }
+}
+
 const initState = {
   userId: null,
   token: null,
   error: null,
   loading: false,
   signupSuccess: false
+}
+
+const errorReset = (state, action) => {
+  return updatedObject(state, {error: null})
 }
 
 const signupStart = (state, action) => {
@@ -27,7 +40,7 @@ const signupSuccess = (state, action) => {
 
 const signupFail = (state, action) => {
   return updatedObject(state, {
-    error: action.error,
+    error: errorMessageTranslator(action.error.message),
     loading: false,
     signupSuccess: false
   })
@@ -35,13 +48,12 @@ const signupFail = (state, action) => {
 
 const signupError = (state, action) => {
   return updatedObject(state, {
-    error: action.error,
+    error: errorMessageTranslator(action.error.message),
     loading: false
   })
 }
 
 const signupReset = (state, action) => {
-  console.log('Sign up reset Reducer...');
   return updatedObject(state, {
     signupSuccess: false
   })
@@ -62,14 +74,14 @@ const signinSuccess = (state, action) => {
 
 const signinFail = (state, action) => {
   return updatedObject(state, {
-    error: action.error,
+    error: errorMessageTranslator(action.error.message),
     loading: false
   })
 }
 
 const signinError = (state, action) => {
   return updatedObject(state, {
-    error: action.error,
+    error: errorMessageTranslator(action.error.message),
     loading: false
   })
 }
@@ -97,6 +109,8 @@ export default (state = initState, action) => {
     case actionTypes.SIGN_IN_FAIL: return signinFail(state, action);
     case actionTypes.SIGN_IN_ERROR: return signinError(state, action);
     case actionTypes.LOGOUT: return logout(state,action);
+
+    case actionTypes.AUTH_ERROR_RESET: return errorReset(state, action);
 
     default:  return state
   }

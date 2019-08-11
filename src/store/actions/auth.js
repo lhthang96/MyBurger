@@ -2,6 +2,12 @@ import * as actionTypes from './actionTypes';
 import * as actions from '../actions/index';
 import axios from '../../axios';
 
+export const errorReset = () => {
+  return {
+    type: actionTypes.AUTH_ERROR_RESET
+  }
+}
+
 export const signinStart = () => {
   return {
     type: actionTypes.SIGN_IN_START
@@ -84,7 +90,6 @@ export const signupError = (error) => {
 }
 
 export const signupReset = () => {
-  console.log('Sign up Reset Action Store...')
   return {
     type: actionTypes.SIGN_UP_RESET
   }

@@ -33,6 +33,10 @@ class SignIn extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.errorReset();
+  }
+
   inputChangedHandler = (event, itemId) => {
     const updatedInputControls = {
       ...this.state.inputControls,
@@ -70,7 +74,7 @@ class SignIn extends Component {
       </div>
     ))
 
-    const errorMessage = this.props.error ? <p style={{color: 'red'}}>{this.props.error.message}</p> : null;
+    const errorMessage = this.props.error ? <p style={{color: 'red'}}>{this.props.error}</p> : null;
 
     let form = <Spinner isShow />;
 
@@ -118,7 +122,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSignInSend: (email, password) => dispatch(actions.signinSend(email, password))
+    onSignInSend: (email, password) => dispatch(actions.signinSend(email, password)),
+    errorReset: () => dispatch(actions.errorReset())
   }
 }
 

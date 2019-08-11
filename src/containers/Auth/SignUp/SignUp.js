@@ -67,8 +67,8 @@ class SignUp extends Component {
   }
 
   componentDidMount() {
-    console.log('Sign up did mount...');
     this.props.signupReset();
+    this.props.errorReset();
   }
 
   onCheckFormValid = () => {
@@ -128,7 +128,7 @@ class SignUp extends Component {
     ))
 
     let form = <Spinner isShow />;
-    const errorMessage = this.props.error ? <p style={{color: 'red'}}>{this.props.error.message}</p> : null;
+    const errorMessage = this.props.error ? <p style={{color: 'red'}}>{this.props.error}</p> : null;
 
     if (!this.props.loading) {
       form = (
@@ -175,7 +175,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onSignUpSend: (email, password) => dispatch(actions.signupSend(email, password)),
-    signupReset: () => dispatch(actions.signupReset())
+    signupReset: () => dispatch(actions.signupReset()),
+    errorReset: () => dispatch(actions.errorReset())
   }
 }
 
