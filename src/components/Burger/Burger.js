@@ -19,8 +19,10 @@ const burger = (props) => {
     transformedIngredients = <p>Let's add some ingredients!</p>
   }
 
+  const scrollClass = props.isScroll ? classes.Scroll : null;
+
   return(
-    <div className={classes.Burger}>
+    <div className={[classes.Burger, scrollClass].join(' ')}>
       <BurgerIngredient type="bread-top" />
       {transformedIngredients}
       <BurgerIngredient type="bread-bottom" />

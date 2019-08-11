@@ -7,10 +7,10 @@ import classes from './BuildControls.css';
 import BuildControl from './BuildControl/BuildControl';
 
 const controls = [
-  {label: 'Salad', type: 'salad'},
   {label: 'Bacon', type: 'bacon'},
   {label: 'Chesse', type: 'cheese'},
-  {label: 'Meat', type: 'meat'}
+  {label: 'Meat', type: 'meat'},
+  {label: 'Salad', type: 'salad'}
 ];
 
 const buildControls = (props) => (
@@ -24,6 +24,9 @@ const buildControls = (props) => (
         removed = {() => props.removeIngredient(item.type)}
         isDisabled = {props.disabledRemoved[item.type]} />
     })}
+
+    <p onClick={props.resetIngredient}>Reset</p>
+
     <button
       className={classes.OrderButton}
       disabled={!props.readyToOrder}
@@ -35,7 +38,8 @@ const buildControls = (props) => (
 const mapDispatchToProps = dispatch => {
   return {
     addIngredient: (ingredientType) => dispatch(actions.addIngredient(ingredientType)),
-    removeIngredient: (ingredientType) => dispatch(actions.removeIngredient(ingredientType))
+    removeIngredient: (ingredientType) => dispatch(actions.removeIngredient(ingredientType)),
+    resetIngredient: () => dispatch(actions.resetIngredient())
   }
 }
 

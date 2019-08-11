@@ -60,7 +60,7 @@ class BurgerBuilder extends Component {
 
     return ( this.props.storeIngredients ?
       <Auxiliary>
-        <Burger ingredients={this.props.storeIngredients} />
+        <Burger ingredients={this.props.storeIngredients} isScroll />
 
         <BuildControls 
           ingredientAdded={this.addIngredientHandler}
