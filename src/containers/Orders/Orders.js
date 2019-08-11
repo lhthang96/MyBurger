@@ -34,7 +34,7 @@ class Orders extends Component {
         return (
           <div className={classes.OrderItem} key={item.id}>
             <div className={[classes.OrderItemContent, itemColorClass(item.orderData.status)].join(' ')}>
-              <p><strong>Ingredients: </strong>{this.ingredientsList(item.orderData.ingredients)}</p>
+              <p className={classes.IngredientsText}><strong>Ingredients: </strong>{this.ingredientsList(item.orderData.ingredients)}</p>
               <p><strong>Total Price: </strong>{item.orderData.totalPrice.toFixed(2)} $</p>
               <p><strong>Status: </strong>{item.orderData.status}</p>
             </div>

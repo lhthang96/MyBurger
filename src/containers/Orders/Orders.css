@@ -49,11 +49,17 @@
   box-shadow: 2px 0 1px #e55039;
 }
 
-.OrderItemContent span {
+.OrderItemContent .IngredientsText span {
+  display: inline-block;
   padding: 4px 8px;
   margin: 0 4px;
+  margin-bottom: .5em;
   background: #eee;
   border: 1px solid #ccc;
+}
+
+.OrderItemContent .IngredientsText {
+  margin: 0;
 }
 
 .noOrderMessageBox {
