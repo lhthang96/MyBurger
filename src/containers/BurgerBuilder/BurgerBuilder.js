@@ -1,5 +1,5 @@
-import React, {Component, useEffect} from 'react';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import React, { useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/index';
 
 // HOC
@@ -11,19 +11,21 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 export default (props) => {
+
+  // ############################### Set up State and Store ###############################
   const ingredients = useSelector(state => state.burgerBuilder.ingredients);
   const totalPrice = useSelector(state => state.burgerBuilder.totalPrice);
 
   const dispatch = useDispatch();
 
-  const fetchIngredients = dispatch(actions.fetchIngredients());
-  const addIngredient = dispatch(actions.addIngredient());
-  const removeIngredient = dispatch(actions.removeIngredient());
+  const fetchIngredients = () => dispatch(actions.fetchIngredients());
   
   useEffect(() => {
     fetchIngredients();
   }, [])
-  // Component methods
+
+
+  // ############################### Component methods ###############################
   const checkReadyToOrder = (ingredients) => {
     const sum = Object.keys(ingredients)
       .map(igKey => {
@@ -40,8 +42,8 @@ export default (props) => {
     props.history.push(props.match.url + '/checkout');
   }
 
-  // Component content
-  const disabledRemoved = {ingredients};
+  // ############################### Component content ###############################
+  const disabledRemoved = {...ingredients};
 
     for (let key in disabledRemoved) {
       disabledRemoved[key] = disabledRemoved[key] <= 0;
@@ -60,8 +62,6 @@ export default (props) => {
 
         <BuildControls 
           ingredients={ingredients}
-          ingredientAdded={this.addIngredientHandler}
-          ingredientRemoved = {this.removeIngredientHandler}
           disabledRemoved = {disabledRemoved}
           totalPrice={totalPrice}
           readyToOrder={checkReadyToOrder(ingredients)}
@@ -72,85 +72,3 @@ export default (props) => {
   
   return burgerBuilder;
 }
-
-// class BurgerBuilder extends Component {
-
-//   state = {
-//     readyToPurchase: false,
-//     loading: false
-//   }
-
-//   componentDidMount() {
-//     this.props.fetchIngredients();
-//   }
-
-//   checkReadyToOrder (ingredients) {
-//     const sum = Object.keys(ingredients)
-//       .map(igKey => {
-//         return ingredients[igKey];
-//       })
-//       .reduce((sum, el) => {
-//         return sum + el;
-//       }, 0);
-
-//     return sum > 0;
-//   }
-
-//   goCheckout = () => {
-//     this.props.history.push(this.props.match.url + '/checkout');
-//   }
-
-//   resetIngredient = () => {
-//     const updatedState = {
-//       ...this.props.storeIngredients
-//     }
-//     for (let key in updatedState) {
-//       updatedState[key] = 0;
-//     };
-//     this.setState({
-//       ingredients: updatedState,
-//       totalPrice: 4,
-//       readyToOrder: false
-//     });
-//   }
-
-//   render() {
-//     const disabledRemoved = {...this.props.storeIngredients};
-
-//     for (let key in disabledRemoved) {
-//       disabledRemoved[key] = disabledRemoved[key] <= 0;
-//     }
-
-//     return ( this.props.storeIngredients ?
-//       <Auxiliary>
-//         <Burger ingredients={this.props.storeIngredients} isScroll />
-
-//         <BuildControls 
-//           ingredients={this.props.storeIngredients}
-//           ingredientAdded={this.addIngredientHandler}
-//           ingredientRemoved = {this.removeIngredientHandler}
-//           disabledRemoved = {disabledRemoved}
-//           totalPrice={this.props.storeTotalPrice}
-//           readyToOrder={this.checkReadyToOrder(this.props.storeIngredients)}
-//           goCheckout={this.goCheckout} />
-
-//       </Auxiliary> :
-//       <div style={{width:'100%', minHeight: '80vh',display:'flex',justifyContent:'center',alignItems:'center'}}><Spinner isShow /></div>
-//     );
-//   }
-// }
-
-// const mapStateToProps = state => {
-//   return {
-//     storeIngredients: state.burgerBuilder.ingredients,
-//     storeTotalPrice: state.burgerBuilder.totalPrice
-//   }
-// }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     fetchIngredients: () => dispatch(actions.fetchIngredients())
-//   }
-// }
-
-// export default connect(mapStateToProps,mapDispatchToProps)(BurgerBuilder);
