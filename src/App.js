@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {BrowserRouter, Route} from 'react-router-dom'
-import {connect} from 'react-redux';
+import React, {useCallback, useEffect} from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 import * as actions from './store/actions/index';
 
 import LazyComponent from './hoc/LazyComponent/LazyComponent';
@@ -31,36 +31,27 @@ const LazySignUp = LazyComponent(() => {
   return import('./containers/Auth/SignUp/SignUp');
 });
 
-class App extends Component {
-  componentDidMount() {
-    this.props.authCheckInit();
-  }
+export default () => {
+  const dispatch = useDispatch();
+  const authCheckInit = useCallback(() => dispatch(actions.authCheckInit()),[dispatch]);
 
-  render() {
-    return (
-      <div>
-        <BrowserRouter>
-          <Layout>
-            <Route path='/' exact component={HomePage} />
-            <Route path='/burger-builder' exact component={BurgerBuilder} />
-            <Route path='/burger-builder/checkout' component={Checkout} />
-            <Route path='/orders' component={LazyOrders} />
-            <Route path='/feedback' component={LazyFeedback} />
-            <Route path='/contact' component={LazyContact} />
-            <Route path='/signin' component={LazySignIn} />
-            <Route path='/signup' component={LazySignUp} />
-            <Route path='/logout' component={Logout} />
-          </Layout>
-        </BrowserRouter>
-      </div>
-    );
-  }
+  useEffect(() => authCheckInit() , [authCheckInit]);
+
+  return (
+    <div>
+      <BrowserRouter>
+        <Layout>
+          <Route path='/' exact component={HomePage} />
+          <Route path='/burger-builder' exact component={BurgerBuilder} />
+          <Route path='/burger-builder/checkout' component={Checkout} />
+          <Route path='/orders' component={LazyOrders} />
+          <Route path='/feedback' component={LazyFeedback} />
+          <Route path='/contact' component={LazyContact} />
+          <Route path='/signin' component={LazySignIn} />
+          <Route path='/signup' component={LazySignUp} />
+          <Route path='/logout' component={Logout} />
+        </Layout>
+      </BrowserRouter>
+    </div>
+  );
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    authCheckInit: () => dispatch(actions.authCheckInit())
-  }
-}
-
-export default connect(null, mapDispatchToProps)(App);

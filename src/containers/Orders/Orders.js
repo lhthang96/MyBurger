@@ -1,23 +1,25 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import * as actions from '../../store/actions/index';
-// import axios from '../../axios';
+import {useSelector} from 'react-redux';
 
 import classes from './Orders.css';
 
-// import withNotifHandler from '../../hoc/WithNotifHandler/WithNotifHandler';
-
 import Spinner from '../../components/UI/Spinner/Spinner';
 
-class Orders extends Component {
+export default () => {
 
-  showOrdersList = () => {
-    if (this.props.error) {
+  const ordersList        = useSelector( state => state.order.ordersList);
+  const loading           = useSelector( state => state.order.loading);
+  const error             = useSelector( state => state.order.error);
+  const errorMessage      = useSelector( state => state.order.errorMessage);
+  const isAuthenticated   = useSelector( state => state.auth.token !== null);
+
+  const showOrdersList = () => {
+    if (error) {
       return (
         <div className={classes.ErrorBox}>
           <i className="fas fa-exclamation-triangle fa-4x"></i>
-          <p>{this.props.errorMessage.message}</p>
+          <p>{errorMessage.message}</p>
         </div>
       )
     }
@@ -29,12 +31,29 @@ class Orders extends Component {
       return classes.SuccessItem;
     }
 
-    if (this.props.ordersList.length > 0) {
-      const list = this.props.ordersList.map(item => {
+    const ingredientsList = (list) => {
+      let ingredients = [];
+      for (let key in list) {
+        ingredients.push({
+          name: key,
+          amount: list[key]
+        }) 
+      };
+      
+      const ingredientsList = ingredients.map(item => {
+        if (item.amount > 0) {
+          return <span key={item.name}>{item.name} ({item.amount})</span>
+        } else return null;
+      });
+      return(ingredientsList);
+    }
+
+    if (ordersList.length > 0) {
+      const list = ordersList.map(item => {
         return (
           <div className={classes.OrderItem} key={item.id}>
             <div className={[classes.OrderItemContent, itemColorClass(item.orderData.status)].join(' ')}>
-              <p className={classes.IngredientsText}><strong>Ingredients: </strong>{this.ingredientsList(item.orderData.ingredients)}</p>
+              <p className={classes.IngredientsText}><strong>Ingredients: </strong>{ingredientsList(item.orderData.ingredients)}</p>
               <p><strong>Total Price: </strong>{item.orderData.totalPrice.toFixed(2)} $</p>
               <p><strong>Status: </strong>{item.orderData.status}</p>
             </div>
@@ -50,60 +69,21 @@ class Orders extends Component {
     ) ;
   }
 
-  ingredientsList = (list) => {
-    let ingredients = [];
-    for (let key in list) {
-      ingredients.push({
-        name: key,
-        amount: list[key]
-      }) 
-    };
-    
-    const ingredientsList = ingredients.map(item => {
-      if (item.amount > 0) {
-        return <span key={item.name}>{item.name} ({item.amount})</span>
-      } else return null;
-    });
-    return(ingredientsList);
-  }
-
-  render() {
-    if (this.props.isAuthenticated) {
-      return (
-        <div className={classes.OrdersBox}>
-          <h3 className={this.props.ordersList.length > 0 ? null : classes.displayNone}>Your orders:</h3>
-          <div className={classes.SpinnerBox}>
-            <Spinner isShow={this.props.loading} />
-          </div>
-          {this.props.loading ? null : this.showOrdersList()}
-        </div>
-      )
-    }
-    return (
+  return isAuthenticated
+    ? (
       <div className={classes.OrdersBox}>
-        <div className={classes.NotAuthMessageBox}>
-          <p>You have to <span><Link to='/signin' className={classes.SuccessText}>Sign in</Link></span> to see your orders...</p>
+        <h3 className={ordersList.length > 0 ? null : classes.displayNone}>Your orders:</h3>
+        <div className={classes.SpinnerBox}>
+          <Spinner isShow={loading} />
         </div>
+        {loading ? null : showOrdersList()}
       </div>
     )
-  }
+  : (
+    <div className={classes.OrdersBox}>
+      <div className={classes.NotAuthMessageBox}>
+        <p>You have to <span><Link to='/signin' className={classes.SuccessText}>Sign in</Link></span> to see your orders...</p>
+      </div>
+    </div>
+  )
 }
-
-const mapStateToProps = state => {
-  return {
-    ordersList: state.order.ordersList,
-    loading: state.order.loading,
-    error: state.order.error,
-    errorMessage: state.order.errorMessage,
-    isAuthenticated: state.auth.token !== null,
-    userId: state.auth.userId
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    initOrdersList: (userId) => dispatch(actions.fetchOrdersList(userId))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
