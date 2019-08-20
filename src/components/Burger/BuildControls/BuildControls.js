@@ -14,6 +14,7 @@ const controls = [
 ];
 
 export default (props) => {
+  // ############################### Set up State and Store ###############################
   const dispatch = useDispatch();
 
   const addIngredient = (ingredientType) => dispatch(actions.addIngredient(ingredientType));
@@ -21,6 +22,7 @@ export default (props) => {
   const resetIngredient = () => dispatch(actions.resetIngredient());
   const burgerComboStandard = () => dispatch(actions.burgerComboStandard());
 
+  // ############################### Component Content ###############################
   return (
     <div className={classes.BuildControls}>
       <p>Current Price: <strong>{props.totalPrice.toFixed(2)} $</strong></p>
