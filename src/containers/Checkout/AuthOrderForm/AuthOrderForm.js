@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 
 import classes from './AuthOrderForm.css';
@@ -11,29 +11,32 @@ import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Button from '../../../components/UI/Button/Button';
 
-class AuthOrderForm extends Component {
+export default (props) => {
+  const [isShowOrderSummary, setIsShowOrderSummary] = useState(false);
+  const [isCancelCheckout, setIsCancelCheckout] = useState(false);
 
-  state = {
-    isShowOrderSummary: false,
-    isCancel: false
+  const loading = useSelector(state => state.order.sendLoading);
+  const userId = useSelector(state => state.auth.userId);
+
+  const dispatchRedux = useDispatch();
+  const sendOrder = (orderData) => dispatchRedux(actions.sendOrder(orderData));
+
+  const onCancelCheckoutHandler = () => {
+    setIsCancelCheckout(true);
   }
 
-  onCancelCheckoutHandler = () => {
-    this.setState({isCancel: true})
+  const openOrderSummary = () => {
+    setIsShowOrderSummary(true);
   }
 
-  openOrderSummary = () => {
-    this.setState({isShowOrderSummary: true});
+  const closeOrderSummary = () => {
+    setIsShowOrderSummary(false);
   }
 
-  closeOrderSummary = () => {
-    this.setState({isShowOrderSummary: false});
-  }
-
-  sendOrderHandler = () => {
+  const sendOrderHandler = () => {
     const orderData = {
-      ingredients: this.props.ingredients,
-      totalPrice: this.props.totalPrice,
+      ingredients: props.ingredients,
+      totalPrice: props.totalPrice,
       customer: {
         address: '14 Test street, Testing City',
         name: 'Admin',
@@ -45,61 +48,42 @@ class AuthOrderForm extends Component {
 
     const updatedOrderData = {
       ...orderData,
-      userId: this.props.userId ? this.props.userId : 'Anonymous'
+      userId: userId ? userId : 'Anonymous'
     };
 
-    this.props.sendOrder(updatedOrderData);
+    sendOrder(updatedOrderData);
   }
 
-  render() {
+  const isRedirect = isCancelCheckout ? <Redirect to='/burger-builder' /> : null;
+  const modalContent = loading ? (
+      <Spinner isShow={loading} />
+  ) : (
+    <OrderSummary
+      ingredients={props.ingredients}
+      totalPrice={props.totalPrice}
+      closeModal={closeOrderSummary}
+      sendOrder={sendOrderHandler} />
+  )
 
-    const isRedirect = this.state.isCancel ? <Redirect to='/burger-builder' /> : null;
-    const modalContent = this.props.loading ? (
-        <Spinner isShow={this.props.loading} />
-    ) : (
-      <OrderSummary
-        ingredients={this.props.ingredients}
-        totalPrice={this.props.totalPrice}
-        closeModal={this.closeOrderSummary}
-        sendOrder={this.sendOrderHandler} />
-    )
-
-    return(
-      <div className={classes.AuthOrderForm}>
-        {isRedirect}
-        <Modal isShow={this.state.isShowOrderSummary} closeModal={this.closeOrderSummary}>
-          {modalContent}
-        </Modal>
-        <div className={classes.AuthOrderInfoBox}>
-          <p>Hi <strong>Admin</strong>, thanks for using our service.</p>
-          <div className={classes.AuthOrderInfoCard}>
-            <h4>Your contact info:</h4>
-            <p><strong>Phone: </strong>(+84) 359 532 535</p>
-            <p><strong>Address: </strong>14 Test street, Testing City.</p>
-          </div>
-        </div>
-
-        <div className={classes.ButtonBox}>
-          <Button btnType='Danger' clicked={this.onCancelCheckoutHandler}>Cancel</Button>
-          <Button btnType='Success' clicked={this.openOrderSummary}>Order</Button>
+  return(
+    <div className={classes.AuthOrderForm}>
+      {isRedirect}
+      <Modal isShow={isShowOrderSummary} closeModal={closeOrderSummary}>
+        {modalContent}
+      </Modal>
+      <div className={classes.AuthOrderInfoBox}>
+        <p>Hi <strong>Admin</strong>, thanks for using our service.</p>
+        <div className={classes.AuthOrderInfoCard}>
+          <h4>Your contact info:</h4>
+          <p><strong>Phone: </strong>(+84) 359 532 535</p>
+          <p><strong>Address: </strong>14 Test street, Testing City.</p>
         </div>
       </div>
-    )
-  }
-}
 
-const mapStateToProps = state => {
-  return {
-    loading: state.order.sendLoading,
-    token: state.auth.token,
-    userId: state.auth.userId
-  }
+      <div className={classes.ButtonBox}>
+        <Button btnType='Danger' clicked={onCancelCheckoutHandler}>Cancel</Button>
+        <Button btnType='Success' clicked={openOrderSummary}>Order</Button>
+      </div>
+    </div>
+  )
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    sendOrder: (orderData) => dispatch(actions.sendOrder(orderData))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthOrderForm);
