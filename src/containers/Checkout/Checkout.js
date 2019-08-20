@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Redirect} from 'react-router-dom';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import classes from './Checkout.css';
 
@@ -9,49 +9,41 @@ import OrderForm from './OrderForm/OrderForm';
 import AuthOrderForm from './AuthOrderForm/AuthOrderForm';
 import DoneOrder from './DoneOrder/DoneOrder';
 
-class Checkout extends Component {
+export default (props) => {
+  const ingredients       = useSelector( state => state.burgerBuilder.ingredients );
+  const totalPrice        = useSelector( state => state.burgerBuilder.totalPrice );
+  const isAuthenticated   = useSelector( state => state.auth.token !== null );
+  const building          = useSelector( state => state.burgerBuilder.building );
+  const doneBuilt         = useSelector( state => state.burgerBuilder.doneBuilt );
 
-  render() {
-    window.scrollTo(0,0);
+  let content = <DoneOrder isAuthenticated={isAuthenticated} />;
 
-    const orderForm = this.props.isAuthenticated ?
-      <AuthOrderForm ingredients={this.props.storeIngredients} totalPrice={this.props.storeTotalPrice} /> :
-      <OrderForm ingredients={this.props.storeIngredients} totalPrice={this.props.storeTotalPrice} />
 
-    const CheckoutSection = (
-      <div className={classes.CheckoutBox}>
-        <CheckoutSummary
-          ingredients={this.props.storeIngredients}
-          totalPrice={this.props.storeTotalPrice} />
-          
-        <div className={classes.CheckoutFormBox}>
-          {orderForm}
-        </div>
+  window.scrollTo(0,0);
+
+  const orderForm = isAuthenticated ?
+    <AuthOrderForm ingredients={ingredients} totalPrice={totalPrice} /> :
+    <OrderForm ingredients={ingredients} totalPrice={totalPrice} />
+
+  const CheckoutSection = (
+    <div className={classes.CheckoutBox}>
+      <CheckoutSummary
+        ingredients={ingredients}
+        totalPrice={totalPrice} />
+        
+      <div className={classes.CheckoutFormBox}>
+        {orderForm}
       </div>
-    );
+    </div>
+  );
 
-    let content = <DoneOrder isAuthenticated={this.props.isAuthenticated} />;
-
-    if (!this.props.building && !this.props.doneBuilt) {
-      content = <Redirect to='/burger-builder' />
-    }
-
-    if (this.props.building && !this.props.doneBuilt) {
-      content = CheckoutSection;
-    }
-
-    return content;
+  if (!building && !doneBuilt) {
+    content = <Redirect to='/burger-builder' />
   }
-}
 
-const mapStateToProps = state => {
-  return {
-    storeIngredients: state.burgerBuilder.ingredients,
-    storeTotalPrice: state.burgerBuilder.totalPrice,
-    isAuthenticated: state.auth.token !== null,
-    building: state.burgerBuilder.building,
-    doneBuilt: state.burgerBuilder.doneBuilt
+  if (building && !doneBuilt) {
+    content = CheckoutSection;
   }
-}
 
-export default connect(mapStateToProps)(Checkout);
+  return content;
+}
