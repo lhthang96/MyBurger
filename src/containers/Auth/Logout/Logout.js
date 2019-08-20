@@ -1,34 +1,23 @@
-import React, {Component} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {Redirect} from 'react-router-dom';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import * as actions from '../../../store/actions/index';
 
-class Logout extends Component {
+export default () => {
 
-  componentDidMount() {
-    this.props.logout();
-    this.props.resetOrdersList();
-  }
+  const building = useSelector(state => state.burgerBuilder.building);
 
-  render() {
-    return (
-      this.props.building ? <Redirect to='/burger-builder/checkout' /> : <Redirect to='/' />
-    )
-  }
+  const dispatch = useDispatch();
+  const logout = useCallback(() => dispatch(actions.logout()),[dispatch]);
+  const resetOrdersList = useCallback(() => dispatch(actions.resetOrdersList()),[dispatch]);
+
+  useEffect(() => {
+    logout();
+    resetOrdersList();
+  }, [logout, resetOrdersList]);
+
+  return (
+    building ? <Redirect to='/burger-builder/checkout' /> : <Redirect to='/' />
+  )
 }
-
-const mapStateToProps = state => {
-  return {
-    building: state.burgerBuilder.building
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    logout: () => dispatch(actions.logout()),
-    resetOrdersList: () => dispatch(actions.resetOrdersList())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Logout);
