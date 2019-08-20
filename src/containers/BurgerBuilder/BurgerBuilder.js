@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import * as actions from '../../store/actions/index';
 
@@ -18,11 +18,11 @@ export default (props) => {
 
   const dispatch = useDispatch();
 
-  const fetchIngredients = () => dispatch(actions.fetchIngredients());
+  const fetchIngredients = useCallback(() => dispatch(actions.fetchIngredients()), [dispatch]);
   
   useEffect(() => {
     fetchIngredients();
-  }, [])
+  }, [fetchIngredients])
 
 
   // ############################### Component methods ###############################
@@ -31,9 +31,7 @@ export default (props) => {
       .map(igKey => {
         return ingredients[igKey];
       })
-      .reduce((sum, el) => {
-        return sum + el;
-      }, 0);
+      .reduce((sum, el) => sum + el);
 
     return sum > 0;
   }
@@ -45,9 +43,9 @@ export default (props) => {
   // ############################### Component content ###############################
   const disabledRemoved = {...ingredients};
 
-    for (let key in disabledRemoved) {
-      disabledRemoved[key] = disabledRemoved[key] <= 0;
-    }
+  for (let key in disabledRemoved) {
+    disabledRemoved[key] = disabledRemoved[key] <= 0;
+  }
 
   let burgerBuilder = (
     <div style={{width:'100%', minHeight: '80vh',display:'flex',justifyContent:'center',alignItems:'center'}}>

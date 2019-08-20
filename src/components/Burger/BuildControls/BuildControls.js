@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 
 import classes from './BuildControls.css';
@@ -13,21 +13,27 @@ const controls = [
   {label: 'Salad', type: 'salad'}
 ];
 
-const buildControls = (props) => {
-  console.log(props.ingredients);
+export default (props) => {
+  const dispatch = useDispatch();
+
+  const addIngredient = (ingredientType) => dispatch(actions.addIngredient(ingredientType));
+  const removeIngredient = (ingredientType) => dispatch(actions.removeIngredient(ingredientType));
+  const resetIngredient = () => dispatch(actions.resetIngredient());
+  const burgerComboStandard = () => dispatch(actions.burgerComboStandard());
+
   return (
     <div className={classes.BuildControls}>
       <p>Current Price: <strong>{props.totalPrice.toFixed(2)} $</strong></p>
       <div className={classes.ResetIngredientsBox}>
-        <p onClick={props.resetIngredient} style={{color:'#703B09'}} >Reset</p>
-        <p onClick={props.burgerComboStandard} style={{color:'#2f4e03'}} >Standard burger</p>
+        <p onClick={resetIngredient} style={{color:'#703B09'}} >Reset</p>
+        <p onClick={burgerComboStandard} style={{color:'#2f4e03'}} >Standard burger</p>
       </div>
       {controls.map(item => {
         return <BuildControl
           key={item.label}
           label={item.label + ' (' + props.ingredients[item.type] + ') '}
-          added={() => props.addIngredient(item.type)}
-          removed = {() => props.removeIngredient(item.type)}
+          added={() => addIngredient(item.type)}
+          removed = {() => removeIngredient(item.type)}
           isDisabled = {props.disabledRemoved[item.type]} />
       })}
   
@@ -38,15 +44,4 @@ const buildControls = (props) => {
       >CHECKOUT</button>
     </div>
   );
-} 
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addIngredient: (ingredientType) => dispatch(actions.addIngredient(ingredientType)),
-    removeIngredient: (ingredientType) => dispatch(actions.removeIngredient(ingredientType)),
-    resetIngredient: () => dispatch(actions.resetIngredient()),
-    burgerComboStandard: () => dispatch(actions.burgerComboStandard())
-  }
 }
-
-export default connect(null,mapDispatchToProps)(buildControls);
