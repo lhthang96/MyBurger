@@ -35,7 +35,7 @@ export default () => {
   const dispatch = useDispatch();
   const authCheckInit = useCallback(() => dispatch(actions.authCheckInit()),[dispatch]);
 
-  useEffect(() => authCheckInit() , [authCheckInit]);
+  useEffect(() =>  authCheckInit(), [authCheckInit]);
 
   return (
     <div>

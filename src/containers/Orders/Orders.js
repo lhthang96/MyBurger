@@ -8,11 +8,11 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 
 export default () => {
 
-  const ordersList        = useSelector( state => state.order.ordersList);
-  const loading           = useSelector( state => state.order.loading);
-  const error             = useSelector( state => state.order.error);
-  const errorMessage      = useSelector( state => state.order.errorMessage);
-  const isAuthenticated   = useSelector( state => state.auth.token !== null);
+  const ordersList        = useSelector( state => state.order.ordersList );
+  const loading           = useSelector( state => state.order.loading );
+  const error             = useSelector( state => state.order.error );
+  const errorMessage      = useSelector( state => state.order.errorMessage );
+  const isAuthenticated   = useSelector( state => state.auth.token !== null );
 
   const showOrdersList = () => {
     if (error) {

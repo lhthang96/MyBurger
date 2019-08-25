@@ -97,20 +97,20 @@ const logout = (state, action) => {
 export default (state = initState, action) => {
   switch (action.type) {
     // Sign In cases
-    case actionTypes.SIGN_UP_START: return signupStart(state, action);
-    case actionTypes.SIGN_UP_SUCCESS: return signupSuccess(state, action);
-    case actionTypes.SIGN_UP_FAIL: return signupFail(state, action);
-    case actionTypes.SIGN_UP_ERROR: return signupError(state, action);
-    case actionTypes.SIGN_UP_RESET: return signupReset(state, action);
+    case actionTypes.SIGN_UP_START:     return signupStart(state, action);
+    case actionTypes.SIGN_UP_SUCCESS:   return signupSuccess(state, action);
+    case actionTypes.SIGN_UP_FAIL:      return signupFail(state, action);
+    case actionTypes.SIGN_UP_ERROR:     return signupError(state, action);
+    case actionTypes.SIGN_UP_RESET:     return signupReset(state, action);
 
     // Sign In cases
-    case actionTypes.SIGN_IN_START: return signinStart(state, action);
-    case actionTypes.SIGN_IN_SUCCESS: return signinSuccess(state, action);
-    case actionTypes.SIGN_IN_FAIL: return signinFail(state, action);
-    case actionTypes.SIGN_IN_ERROR: return signinError(state, action);
-    case actionTypes.LOGOUT: return logout(state,action);
+    case actionTypes.SIGN_IN_START:     return signinStart(state, action);
+    case actionTypes.SIGN_IN_SUCCESS:   return signinSuccess(state, action);
+    case actionTypes.SIGN_IN_FAIL:      return signinFail(state, action);
+    case actionTypes.SIGN_IN_ERROR:     return signinError(state, action);
+    case actionTypes.LOGOUT:            return logout(state,action);
 
-    case actionTypes.AUTH_ERROR_RESET: return errorReset(state, action);
+    case actionTypes.AUTH_ERROR_RESET:  return errorReset(state, action);
 
     default:  return state
   }
