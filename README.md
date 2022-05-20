@@ -1,18 +1,18 @@
-# ------------------------- MyBurger -------------------------
-
+# MyBurger
 
 ## Description
 
 MyBurger is the project which is based on the Burger project on the Udemy course of Maximilian Schwarzmüller: React - The Complete Guide (incl Hooks, React Router, Redux), course url: https://www.udemy.com/react-the-complete-guide-incl-redux/.
-In this project I've adjust some use cases, but the core concept is unchanged.
+In this project I've adjusted some use cases, but the core concept is unchanged.
 
-This project demonstrates a web apps to serve the clients order their favourite burger by the fascinating way on their own ( I just used CSS to illustrate the burger and its ingredients: bacon, cheese, meat and salad ), then checkout and order. I also added the user functions (Sign in and Sign out) to this project.
+This project demonstrates a web apps to serve the clients order their favorite burger by the fascinating way on their own ( I just used CSS to illustrate the burger and its ingredients: bacon, cheese, meat and salad ), then checkout and order. User authentication is also added into this project.
 
 All the project is just focus on front-end process, back-end I simply used Firebase as an awesome server to store my necessary data.
 
 ## Goals
 
-This project is the good way to deep dive in React, I've learned a lot :
+This project is the good way to deep dive in React:
+
 - Understand the 'create-react-apps' structure.
 - Deep dive in React component: props and state, life cycles hook,...
 - HTTP requests with 'axios'.
@@ -22,14 +22,14 @@ This project is the good way to deep dive in React, I've learned a lot :
 
 ## How to run
 
-I used 'create-react-app' to build, so all the 'npm' commands is the same as default:
+The project is initialized with `create-react-apps`.
 
 ### `npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
+The page will reload if you make changes.<br>
 You will also see any lint errors in the console.
 
 ### `npm test`
